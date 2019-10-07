@@ -1,0 +1,79 @@
+@extends('layout.mains')
+
+@section('pageCss')
+@stop
+
+@section('content')
+<div class="padding-md">
+
+    <ul class="breadcrumb">
+        <li><a href="{{ url('landing') }}">หน้าเว็บไซต์</a></li>
+        <li><a href="{{ url('setting/year') }}">ตั้งค่าปีงบประมาณ</a></li>
+        <li>งบประมาณ</li>    
+    </ul>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="page-title">
+                ปีงบประมาณ รายการค่าใช้จ่าย : ปีงบประมาณ {{ $settingyear->setting_year }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row padding-md">
+    <div class="col-md-12">
+        <div class="smart-widget widget-dark-blue">
+            <div class="smart-widget-header"> ปีงบประมาณ รายการค่าใช้จ่าย </div>
+            <div class="smart-widget-body">
+
+                @if( Session::has('success') )
+                    <div class="alert alert-success alert-custom alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <i class="fa fa-check-circle m-right-xs"></i> {{ Session::get('success') }}
+                    </div>
+                @elseif( Session::has('error') )
+                    <div class="alert alert-danger alert-custom alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                         <i class="fa fa-times-circle m-right-xs"></i> {{ Session::get('error') }}
+                    </div>
+                @endif
+
+                <div class="smart-widget-body  padding-md"> <!-- form create project -->
+                    {!! Form::open([ 'url' => 'setting/year/budget' , 'method' => 'post' ]) !!} 
+                        <input type="hidden" name="id" value="{{ $settingyear->setting_year_id }}">
+                        <div class="form-group">
+                            @if( count($budget) > 0 )
+                            @foreach( $budget as $item )
+                                @php( $value = $settingbudget->where('budget_id' , $item->budget_id)->where('setting_budget_status' , 1)->first() )
+                                <div class="checkbox">
+                                    <div class="custom-checkbox">
+                                        <input type="checkbox" id="{{ $item->budget_id }}" name="budget[{{ $item->budget_id }}]" value="{{ $item->budget_id }}" {{ count($value)>0?'checked':'' }} />
+                                        <label for="{{ $item->budget_id }}"></label>
+                                    </div>
+                                    <div class="inline-block vertical-top">
+                                        {{ $item->budget_name }}
+                                    </div>
+                                </div>
+                            @endforeach
+                            @endif
+                        </div>
+                        <div class="form-group text-right">
+                            <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> บันทึก</button>
+                        </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@stop
+
+@section('pageScript')
+<script type="text/javascript">
+    $('.datepicker').datepicker({
+        format : "yyyy-mm-dd",
+        autoclose:false,
+    });
+</script>
+@stop

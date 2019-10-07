@@ -1,0 +1,13 @@
+การแก้ไข
+1. เพิ่มไฟล์ extend.css
+2. แก้ไข mains.blade.php
+3. แก้ไขไฟล์ ProjectAllocationController เมธอด DeleteSave
+4. แก้ไขค่า double จาก 10,2 เป็น 15,2 ทุกตาราง
+5. แก้ไขไฟล์  RecuritPaymentSectionController 
+  5.1 บรรทัดที่ 206 เพิ่ม
+   $q = $q->where('register_id' , $generate->register_id);
+  5.2 comment บันทัด 83-85 และ 167-169
+        // if( ( Request::input('absence') + Request::input('salary') ) !=  $payment->position_salary ){
+        //     return redirect()->back()->withError("ไม่สามารถบันทึกรายเบิกจ่ายได้ เนื่องจากไม่เท่ากับเงินเดือนที่กำหนดไว้");
+        // }
+
