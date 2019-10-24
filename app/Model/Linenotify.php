@@ -13,6 +13,9 @@ class Linenotify extends Model
 {
     protected $table = 'tb_linenotify';
     protected $primaryKey = 'linenotify_id';
+    protected $fillable = [];
+    protected $guarded = [];
+    
 
     // public function getNotifymeAttribute(){
     public function scopeNotifyme($query,$message){

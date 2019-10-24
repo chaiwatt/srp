@@ -52,6 +52,7 @@ class UserProfileController extends Controller
 
     public function Edit(){       
         $user = Users::where('user_id' , Request::input('userid') )->first();
+        // return Request::input('linenotify');
         $extension = array('jpg' , 'JPG' , 'jpeg' , 'JPEG' , 'GIF' , 'gif' , 'PNG' , 'png');
         if(Request::hasFile('file')){
             $file = Request::file('file');
@@ -66,19 +67,24 @@ class UserProfileController extends Controller
         $user->position =Request::input('position');
         $user->password = Hash::make(Request::input('pass'));
 
-     //return $user->user_id;
-        //if(Request::input('linenotify') != ''){
-            Linenotify::where('user_id',$user->user_id)
+        $linenotify = Linenotify::where('user_id',$user->user_id)->first();
+        if(Empty($linenotify)){
+            $new = new Linenotify();
+            $new->user_id = Auth::user()->user_id;
+            $new->url = Request::input('linenotify');
+            $new->linetoken = Request::input('linetoken');
+            $new->groupname = 'โครงการคืนคนดีสู่สังคม';
+            $new->save();
+        }else{
+            Linenotify::where('user_id',$user->user_id)->first()
                         ->update([ 
-                            'url' =>  Request::input('linenotify'), 
+                            'url' => Request::input('linenotify'), 
                             ]);
-        //}
-        //if(Request::input('linetoken') != ''){
-            Linenotify::where('user_id',$user->user_id)
+            Linenotify::where('user_id',$user->user_id)->first()
                         ->update([ 
                             'linetoken' =>  Request::input('linetoken'), 
                             ]);
-        //}
+        }
 
         $user->save();
         return redirect('setting/user/profile')->withSuccess("แก้ไขข้อมูลสำเร็จ");

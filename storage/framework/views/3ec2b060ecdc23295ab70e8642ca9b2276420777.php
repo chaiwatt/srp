@@ -180,7 +180,7 @@
                                                     $token="";
                                                 }
                                              ?>
-                                            <input type="text" name="linenotify" class="form-control" value="<?php echo e($url); ?>" />
+                                            <input type="text" name="linenotify" class="form-control" value="https://notify-api.line.me/api/notify" readonly />
                                     
                                             <label>Line Token</label>
                                             <input type="text" name="linetoken" class="form-control" value="<?php echo e($token); ?>" />
