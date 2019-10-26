@@ -874,7 +874,17 @@
                                     </ul>
                                 </li>
                             @endif
-                            
+                            <li class="bg-palette1 {{ ( Request::path()=='landing')?'active':''  }}">
+                                <a href="{{ route('videolist.index') }}">
+                                    <span class="menu-content block">
+                                        <span class="menu-icon"><i class="block fa fa-gear fa-lg"></i></span>
+                                        <span class="text m-left-sm thsaraban20" style="font-weight:200">วีดีโอใช้งาน</span>
+                                    </span>
+                                    <span class="menu-content-hover block">
+                                    	<i class="fa fa-gear fa-lg"></i>
+                                    </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>  
                     <div class="sidebar-fix-bottom clearfix">

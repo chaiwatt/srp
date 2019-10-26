@@ -102,6 +102,10 @@ Route::group(['middleware' => 'auth'] , function(){
 	// Route::get('404' , 'ErrorController@notfound')->name('404');
 	// Route::get('500' , 'ErrorController@fatal')->name('500');
 
+	Route::group(['prefix' => 'videolist'] , function(){
+		Route::get('' , 'VideoListController@Index')->name('videolist.index'); // action login
+		Route::get('play/{id}' , 'VideoListController@play')->name('videolist.play'); // action login
+	});
 	Route::get('logout' , 'AuthController@Logout'); // action login
 
 	Route::group(['prefix' => 'deletedb'] , function(){
