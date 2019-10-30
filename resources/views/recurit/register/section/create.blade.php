@@ -456,7 +456,7 @@
                             <div class="tab-pane fade" id="styleTab_attachment">
                                 <div class="row ">
                                     <div class="col-md-12">
-                                        <label>เอกสารแนบ <span class="text-danger">*เป็นไฟล์ pdf เท่านั้น และตั้งชื่อให้ตรงเอกสาร เช่น บัตรประชาชน.pdf</span></label>
+                                        <label>เอกสารแนบ <span class="text-danger">*ขนาดไฟล์ไม่เกิน 3MB และรวมทั้งหมดไม่เกิน 10MB</span></label>
                                     	<input type="file" name="document[]"  id="doc" class="filestyle" multiple="" />
                                     </div>
                                 </div>
@@ -565,6 +565,32 @@
 
 @section('pageScript')
 <script type="text/javascript">
+    $('#picture').on('change', function() {
+        if($(this)[0].files[0].size/1024  > 250){
+            $("#picture").val(null);
+            alert('ไฟล์รูปต้องไม่เกิน 250KB');
+        }
+    });
+
+    $('#doc').on('change', function() {
+        var attachedfiles = document.getElementById('doc');
+        var sumfilesize =0;
+        for (var i = 0; i < attachedfiles.files.length; i++) {
+            sumfilesize =  attachedfiles + attachedfiles.files[i].size/1024;
+            if(attachedfiles.files[i].size/1024 > 1000){
+                $("#doc").val(null);
+                alert('ขนาดไฟล์เกิน 3MB');
+                return;
+            }
+        }
+        if(sumfilesize > 5000){
+            $("#doc").val(null);
+            alert('ขนาดไฟล์รวมเกิน 10MB');
+        }
+    });
+
+
+
     $(document).ready(function() {
         $('.select2').select2();
     });
@@ -618,17 +644,42 @@
     });
 
     $("#person_id").change(function(){
+        var person = $("#person_id").val();
         $.ajax({
             type:"get",
             url:"{{ url('api/register-person') }}",
             data:{
-                person_id : $("#person_id").val(),
+                person_id : person,
             },
             success : function(data){
-                $("#response_person_id").text(data);
+                console.log(data);
+                
+                if(data == 'มีรหัสบัตรประชาชนอยู่ในระบบแล้ว แต่ยังไม่ active'){
+                   if (confirm(data + ' ต้องการ acttive หรือไม่')) {
+                    activeperson(person);
+                    } 
+                }else{
+                    $("#response_person_id").text(data);
+                }
             }
         })
     })
+
+    function activeperson(person){
+         console.log(person);
+        $.ajax({
+            type:"get",
+            url:"{{ url('api/active-person') }}",
+            data:{
+                person_id : person,
+            },
+            success : function(data){
+                //return data;
+                 window.location.href = data;
+                
+            }
+        })
+    }
 
      $("#register_office_case").change(function(){
         $.ajax({

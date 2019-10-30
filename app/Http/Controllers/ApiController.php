@@ -883,9 +883,14 @@ class ApiController extends Controller{
                 $sum += (int)( Request::input('person_id')[$i] ) * (13-$i);
             }
             if((11-($sum%11))%10 == (int)(Request::input('person_id')[12] ) ){
-                $q = Register::where('person_id' , Request::input('person_id'))->where('register_status' , 1)->first();
+                $q = Register::where('person_id' , Request::input('person_id'))->first();
                 if( !empty($q) ){
-                    return "ไม่สามารถใช้รหัสบัตรประชาชนนี้ได้ เนื่องจากมีอยู่ในระบบแล้ว";
+                    if(Register::where('person_id' , Request::input('person_id'))->where('register_status' , 1)->first()){
+                        return "ไม่สามารถใช้รหัสบัตรประชาชนนี้ได้ เนื่องจากมีอยู่ในระบบแล้ว";
+                    }else{
+                        return "มีรหัสบัตรประชาชนอยู่ในระบบแล้ว แต่ยังไม่ active";
+                    }
+                    
                 }
                 else{
                     return "สามารถใช้รหัสบัตรประชาชนนี้ได้";
@@ -896,6 +901,15 @@ class ApiController extends Controller{
             }
         }
     } //จบ function ตรวจสอบ เลขบัตรประชาชน
+
+    public function ActivePerson(){
+      //ContractorDepartmentCancelController.php  return "dddd";
+        //  return  Request::input('person_id');
+        Register::where('person_id' , Request::input('person_id'))->first()->update([
+            'register_status' => '1'
+        ]);
+        return url('recurit/register/section');
+    }
 
     public function RegisterContractor(){
         $personid = Request::input('person_id');

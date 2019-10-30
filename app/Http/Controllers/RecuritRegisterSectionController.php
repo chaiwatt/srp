@@ -205,16 +205,16 @@ class RecuritRegisterSectionController extends Controller{
         if( $this->authsection() ){
             return redirect('logout');
         }
+        
         $document = RegisterDocument::where('register_document_id' , $id)->first();
+        $register_id = $document->register_id;
         if( count($document) == 0 ){
             return redirect()->back();
         }
 
         @unlink( $document->register_document_file );
-
         RegisterDocument::where('register_document_id' , $id)->delete();
-
-        return redirect()->back()->withSuccess("ลบไฟล์เอกสารเรียบร้อยแล้ว");
+        return redirect(url('recurit/register/section/edit/'.$register_id))->withSuccess("ลบไฟล์เอกสารเรียบร้อยแล้ว");
     }
 
     public function EditSave(){
@@ -222,7 +222,7 @@ class RecuritRegisterSectionController extends Controller{
             return redirect('logout');
         }
         $extension_picture = array('jpg' , 'JPG' , 'jpeg' , 'JPEG' , 'GIF' , 'gif' , 'PNG' , 'png');
-        $extension_pdf = array('pdf');
+        $extension_pdf = array('jpg' , 'JPG' , 'jpeg' , 'JPEG' , 'GIF' , 'gif' , 'PNG' , 'png','pdf','doc','docx','xls','xlsx');
         $auth = Auth::user();
         
         if( Request::input('submit') == "consider" ){
@@ -514,10 +514,10 @@ class RecuritRegisterSectionController extends Controller{
                 RegisterSkill::where('register_id' , $register->register_id)->delete();
             }
 
-
             if(Request::file('document')){   
                 $files = request::file('document');
                 foreach($files as $file){
+                  
                     if( $file != null ){
                         if( in_array($file->getClientOriginalExtension(), $extension_pdf) ){
 

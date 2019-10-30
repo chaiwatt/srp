@@ -1,30 +1,29 @@
-@extends('layout.mains')
+<?php $__env->startSection('pageCss'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('pageCss')
-@stop
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="padding-md">
 
     <ul class="breadcrumb">
-        <li><a href="{{ url('landing') }}">หน้าเว็บไซต์</a></li>
-        <li><a href="{{ url('recurit/register/section') }}">ผู้สมัครร่วมโครงการ</a></li>
+        <li><a href="<?php echo e(url('landing')); ?>">หน้าเว็บไซต์</a></li>
+        <li><a href="<?php echo e(url('recurit/register/section')); ?>">ผู้สมัครร่วมโครงการ</a></li>
         <li>แบบฟอร์มแก้ไขเข้าร่วมโครงการ</li>    
     </ul>
 
-    {!! Form::open([ 'url' => 'recurit/register/section/edit' , 'method' => 'post' , 'files' => 'true' , 'multiple'  ]) !!} 
-    <input type="hidden" name="id" value="{{ $register->register_id }}" />
+    <?php echo Form::open([ 'url' => 'recurit/register/section/edit' , 'method' => 'post' , 'files' => 'true' , 'multiple'  ]); ?> 
+    <input type="hidden" name="id" value="<?php echo e($register->register_id); ?>" />
     <div class="row">
         <div class="col-sm-6">
             <div class="page-title">
-                ข้อมูลผู้สมัคร : {{ $register->name }} {{ $register->lastname }}
+                ข้อมูลผู้สมัคร : <?php echo e($register->name); ?> <?php echo e($register->lastname); ?>
+
             </div>
         </div>
         <div class="col-sm-6">
             <div class="pull-right">
-                <a href="{{ url('recurit/register/section/createcert/'.$register->register_id) }}" class="btn btn-success">ใบรับรอง</a>
-                <a href="{{ url('recurit/register/section/application/'.$register->register_id) }}" class="btn btn-success">แบบฟอร์มผู้สมัคร</a>
-                <a href="{{ url('recurit/register/section/compact/'.$register->register_id) }}" class="btn btn-success">สัญญาจ้าง</a>
+                <a href="<?php echo e(url('recurit/register/section/createcert/'.$register->register_id)); ?>" class="btn btn-success">ใบรับรอง</a>
+                <a href="<?php echo e(url('recurit/register/section/application/'.$register->register_id)); ?>" class="btn btn-success">แบบฟอร์มผู้สมัคร</a>
+                <a href="<?php echo e(url('recurit/register/section/compact/'.$register->register_id)); ?>" class="btn btn-success">สัญญาจ้าง</a>
                 <button type="submit" name="submit" value="consider" class="btn btn-success">บันทึกผลพิจารณา</button>
                 <button type="submit" name="submit" value="editsave" class="btn btn-success"><i class="fa fa-save"></i> บันทึก</button>
             </div>
@@ -81,7 +80,7 @@
                         </div>                        
                     </div>
                     <div class="modal-footer">
-                      {{-- <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button> --}}
+                      
                       <a id ="btncreatecert"  class="btn btn-primary">สร้างใบรับรอง</a>
                     </div>
               </div>
@@ -95,7 +94,7 @@
                 <div class="col-md-7">
                     <div class="radio">
                         <div class="custom-radio m-right-xs">
-                            <input type="radio" id="radio1" name="stackRadio" value="0" {{ $register->register_type==0?'checked':'' }} >
+                            <input type="radio" id="radio1" name="stackRadio" value="0" <?php echo e($register->register_type==0?'checked':''); ?> >
                             <label for="radio1"></label>
                         </div>
                         <div class="inline-block vertical-top">
@@ -104,7 +103,7 @@
                     </div>
                     <div class="radio">
                         <div class="custom-radio m-right-xs">
-                            <input type="radio" id="radio2" name="stackRadio" value="1" {{ $register->register_type==1?'checked':'' }}>
+                            <input type="radio" id="radio2" name="stackRadio" value="1" <?php echo e($register->register_type==1?'checked':''); ?>>
                             <label for="radio2"></label>
                         </div>
                         <div class="inline-block vertical-top">
@@ -113,7 +112,7 @@
                     </div>
                     <div class="radio">
                         <div class="custom-radio m-right-xs">
-                            <input type="radio" id="radio3" name="stackRadio" value="2" {{ $register->register_type==2?'checked':'' }}>
+                            <input type="radio" id="radio3" name="stackRadio" value="2" <?php echo e($register->register_type==2?'checked':''); ?>>
                             <label for="radio3"></label>
                         </div>
                         <div class="inline-block vertical-top">
@@ -125,24 +124,26 @@
         </div>
         <div class="col-sm-3">
             <div class="pull-right">
-                <img src="{{ asset( $register->picture ) }}" width="120" height="140">
+                <img src="<?php echo e(asset( $register->picture )); ?>" width="120" height="140">
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            @if( Session::has('success') )
+            <?php if( Session::has('success') ): ?>
                 <div class="alert alert-success alert-custom alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <i class="fa fa-check-circle m-right-xs"></i> {{ Session::get('success') }}
+                    <i class="fa fa-check-circle m-right-xs"></i> <?php echo e(Session::get('success')); ?>
+
                 </div>
-            @elseif( Session::has('error') )
+            <?php elseif( Session::has('error') ): ?>
                 <div class="alert alert-danger alert-custom alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                     <i class="fa fa-times-circle m-right-xs"></i> {{ Session::get('error') }}
+                     <i class="fa fa-times-circle m-right-xs"></i> <?php echo e(Session::get('error')); ?>
+
                 </div>
-            @endif
+            <?php endif; ?>
             
             <div class="row">
                 <div class="col-md-12">
@@ -150,31 +151,32 @@
                         <div class="form-group">
                             <label>ตำแหน่งที่จ้าง</label><small class="text-danger">*</small>
                             <select class="form-control" name="position" required>
-                                {{ $register->position_id}}
-                                    @if( count($position) > 0 )
-                                    @foreach( $position as $item )
-                                        <option value="{{ $item->position_id }}" @if ($item->position_id  == $register->position_id) selected  @endif  >{{ $item->position_name }}</option>
-                                    @endforeach
-                                    @endif
+                                <?php echo e($register->position_id); ?>
+
+                                    <?php if( count($position) > 0 ): ?>
+                                    <?php $__currentLoopData = $position; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($item->position_id); ?>" <?php if($item->position_id  == $register->position_id): ?> selected  <?php endif; ?>  ><?php echo e($item->position_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <label>อาชีพที่ต้องการฝึกอบรม</label>
-                        <input type="text" name="career" class="form-control" value="{{ $register->career }}" />
+                        <input type="text" name="career" class="form-control" value="<?php echo e($register->career); ?>" />
                     </div>
                     <div class="col-md-3">
                         <label>อนาคตต้องการประกอบอาชีพ/อบรม</label>
-                        <input type="text" name="career_future" class="form-control" value="{{ $register->career_future }}" />
+                        <input type="text" name="career_future" class="form-control" value="<?php echo e($register->career_future); ?>" />
                     </div>
                     <div class="col-md-3">
                         <label>เลขที่ใบสมัคร</label><small class="text-danger">*</small>
-                        <input type="text" name="application_no" value="{{ $register->application_no }}"  class="form-control"  />
+                        <input type="text" name="application_no" value="<?php echo e($register->application_no); ?>"  class="form-control"  />
                     </div>
                 </div>
             </div>
 
-            @if ($register->register_type==1)
+            <?php if($register->register_type==1): ?>
             <div class="row" style="margin-bottom:10px">
                 <div class="col-md-12">
                     <div class="col-md-3">
@@ -193,7 +195,7 @@
                     </div>
                     <div class="col-md-3">
                         <label>เลขที่สัญญาจ้าง</label>
-                        <input type="text" name="contract_no" value="{{ $register->contract_no }}"  class="form-control"  />
+                        <input type="text" name="contract_no" value="<?php echo e($register->contract_no); ?>"  class="form-control"  />
                     </div>
                 </div>
             </div> 
@@ -202,15 +204,15 @@
                 <div class="col-md-12">
                     <div class="col-md-6">
                         <label>ผู้ลงนามสัญญา</label>
-                        <input type="text" class="form-control" name="representativename"  value="{{ $register->representativename }}" autocomplete="off" >
+                        <input type="text" class="form-control" name="representativename"  value="<?php echo e($register->representativename); ?>" autocomplete="off" >
                     </div>
                     <div class="col-md-6">
                         <label>ตำแหน่ง</label>                      
-                        <input type="text" class="form-control" name="representativeposition" value="{{ $register->representativeposition }}" autocomplete="off" >
+                        <input type="text" class="form-control" name="representativeposition" value="<?php echo e($register->representativeposition); ?>" autocomplete="off" >
                     </div>
                 </div>
             </div>  
-            @endif
+            <?php endif; ?>
             <div class="smart-widget widget-dark-blue">
                 <div class="smart-widget-header">
                     แบบฟอร์มสมัครเข้าร่วมโครงการ
@@ -237,24 +239,24 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>หมายเลขบัตรประชาชน</label><small class="text-danger">*</small>
-                                                <input type="text" name="person_id" id="person_id" class="form-control" required="" value="{{ $register->person_id }}" />
+                                                <input type="text" name="person_id" id="person_id" class="form-control" required="" value="<?php echo e($register->person_id); ?>" />
                                                 <span class="help-block text-danger" id="response_person_id"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>คำนำหน้าชื่อ</label><small class="text-danger">*</small>
-                                            {{-- <select class="form-control" name="prefix" id="prefix"></select> --}}
+                                            
                                             <select class="form-control" name="prefix" required>
-                                                    @if( count($prefix) > 0 )
-                                                    @foreach( $prefix as $item )
-                                                        <option value="{{ $item->prefix_id }}" @if ($item->prefix_id  == $register->prefix_id) selected  @endif >{{ $item->prefix_name }}</option>
-                                                    @endforeach
-                                                    @endif
+                                                    <?php if( count($prefix) > 0 ): ?>
+                                                    <?php $__currentLoopData = $prefix; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($item->prefix_id); ?>" <?php if($item->prefix_id  == $register->prefix_id): ?> selected  <?php endif; ?> ><?php echo e($item->prefix_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
                                             </select>
                                         </div>
                                         <div class="col-md-4">
                                             <label>ชื่อ</label><small class="text-danger">*</small>
-                                            <input type="text" name="name" class="form-control" required="" value="{{ $register->name }}" />
+                                            <input type="text" name="name" class="form-control" required="" value="<?php echo e($register->name); ?>" />
                                         </div>
                                     </div>
                                 </div>
@@ -264,7 +266,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>นามสกุล</label><small class="text-danger">*</small>
-                                                <input type="text" name="lastname" class="form-control" value="{{ $register->lastname }}" />
+                                                <input type="text" name="lastname" class="form-control" value="<?php echo e($register->lastname); ?>" />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -287,22 +289,22 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>สัญชาติ</label><small class="text-danger">*</small>
-                                                <input type="text" name="nationality" class="form-control" required="" value="{{ $register->nationality }}" />
+                                                <input type="text" name="nationality" class="form-control" required="" value="<?php echo e($register->nationality); ?>" />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>เชื้อชาติ</label><small class="text-danger">*</small>
-                                            <input type="text" name="ethnicity" class="form-control" required="" value="{{ $register->ethnicity }}" />
+                                            <input type="text" name="ethnicity" class="form-control" required="" value="<?php echo e($register->ethnicity); ?>" />
                                         </div>
                                         <div class="col-md-4">
                                             <label>ศาสนา</label><small class="text-danger">*</small>
-                                            {{-- <select class="form-control" name="religion" id="religion" required></select> --}}
+                                            
                                             <select class="form-control" name="religion" required>
-                                                    @if( count($religion) > 0 )
-                                                    @foreach( $religion as $item )
-                                                        <option value="{{ $item->religion_id }}" @if ($item->religion_id  == $register->religion_id) selected  @endif >{{ $item->religion_name }}</option>
-                                                    @endforeach
-                                                    @endif
+                                                    <?php if( count($religion) > 0 ): ?>
+                                                    <?php $__currentLoopData = $religion; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($item->religion_id); ?>" <?php if($item->religion_id  == $register->religion_id): ?> selected  <?php endif; ?> ><?php echo e($item->religion_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
                                             </select>
                                         </div>
                                     </div>
@@ -313,34 +315,34 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>การรับราชการทหาร</label><small class="text-danger">*</small>
-                                                {{-- <select class="form-control" name="military" id="military" required></select> --}}
+                                                
                                                 <select class="form-control" name="military" required>
-                                                        @if( count($military) > 0 )
-                                                        @foreach( $military as $item )
-                                                            <option value="{{ $item->military_id }}" @if ($item->military_id  == $register->military_id) selected  @endif >{{ $item->military_name }}</option>
-                                                        @endforeach
-                                                        @endif
+                                                        <?php if( count($military) > 0 ): ?>
+                                                        <?php $__currentLoopData = $military; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($item->military_id); ?>" <?php if($item->military_id  == $register->military_id): ?> selected  <?php endif; ?> ><?php echo e($item->military_name); ?></option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        <?php endif; ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <label>สถานะ</label><small class="text-danger">*</small>
-                                            {{-- <select class="form-control" name="married" id="married" required></select> --}}
+                                            
                                             <select class="form-control" name="married" required>
-                                                    @if( count($married) > 0 )
-                                                    @foreach( $married as $item )
-                                                        <option value="{{ $item->married_id }}" @if ($item->married_id  == $register->married_id) selected  @endif >{{ $item->married_name }}</option>
-                                                    @endforeach
-                                                    @endif
+                                                    <?php if( count($married) > 0 ): ?>
+                                                    <?php $__currentLoopData = $married; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($item->married_id); ?>" <?php if($item->married_id  == $register->married_id): ?> selected  <?php endif; ?> ><?php echo e($item->married_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
                                             </select>
                                         </div>
                                         <div class="col-md-2">
                                             <label>จำนวนบุตร</label>
-                                            <input type="number" name="baby" class="form-control" value="{{ $register->baby }}" />
+                                            <input type="number" name="baby" class="form-control" value="<?php echo e($register->baby); ?>" />
                                         </div>
                                         <div class="col-md-4">
                                             <label>โทรศัพท์</label><small class="text-danger">*</small>
-                                            <input type="text" name="phone" class="form-control" value="{{ $register->phone }}" required />
+                                            <input type="text" name="phone" class="form-control" value="<?php echo e($register->phone); ?>" required />
                                         </div>
                                     </div>
                                 </div>
@@ -350,21 +352,21 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>อีเมลล์</label>
-                                                <input type="text" name="email" class="form-control" value="{{ $register->email }}" />
+                                                <input type="text" name="email" class="form-control" value="<?php echo e($register->email); ?>" />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>เฟสบุ๊ค</label>
-                                            <input type="text" name="facebook" class="form-control" value="{{ $register->facebook }}" />
+                                            <input type="text" name="facebook" class="form-control" value="<?php echo e($register->facebook); ?>" />
                                         </div>
                                         <div class="col-md-4">
                                             <label>กลุ่ม</label><small class="text-danger">*</small>
                                             <select class="form-control" name="group" required>
-                                                    @if( count($group) > 0 )
-                                                    @foreach( $group as $item )
-                                                        <option value="{{ $item->group_id }}"  @if ($item->group_id  == $register->group_id) selected  @endif >{{ $item->group_name }}</option>
-                                                    @endforeach
-                                                    @endif
+                                                    <?php if( count($group) > 0 ): ?>
+                                                    <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($item->group_id); ?>"  <?php if($item->group_id  == $register->group_id): ?> selected  <?php endif; ?> ><?php echo e($item->group_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
                                             </select>
                                         </div>
                                     </div>
@@ -375,16 +377,16 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>ชื่อบิดา</label>
-                                                <input type="text" name="father_name" class="form-control" value="{{ $register->father_name }}"  />
+                                                <input type="text" name="father_name" class="form-control" value="<?php echo e($register->father_name); ?>"  />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>นามสกุลบิดา</label>
-                                            <input type="text" name="father_lastname" class="form-control" value="{{ $register->lastname }}"  />
+                                            <input type="text" name="father_lastname" class="form-control" value="<?php echo e($register->lastname); ?>"  />
                                         </div>
                                         <div class="col-md-4">
                                             <label>อาชีพบิดา</label>
-                                            <input type="text" name="father_career" class="form-control" value="{{ $register->father_career }}" />
+                                            <input type="text" name="father_career" class="form-control" value="<?php echo e($register->father_career); ?>" />
                                         </div>
                                     </div>
                                 </div>
@@ -394,16 +396,16 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>ชื่อมารดา</label>
-                                                <input type="text" name="mother_name" class="form-control" value="{{ $register->mother_name }}"  />
+                                                <input type="text" name="mother_name" class="form-control" value="<?php echo e($register->mother_name); ?>"  />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>นามสกุลมารดา</label>
-                                            <input type="text" name="mother_lastname" class="form-control" value="{{ $register->mother_lastname }}"  />
+                                            <input type="text" name="mother_lastname" class="form-control" value="<?php echo e($register->mother_lastname); ?>"  />
                                         </div>
                                         <div class="col-md-4">
                                             <label>อาชีพมารดา</label>
-                                            <input type="text" name="mother_career" class="form-control" value="{{ $register->mother_career }}" />
+                                            <input type="text" name="mother_career" class="form-control" value="<?php echo e($register->mother_career); ?>" />
                                         </div>
                                     </div>
                                 </div>
@@ -413,16 +415,16 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>ชื่อคู่สมรส</label>
-                                                <input type="text" name="spouse_name" class="form-control" value="{{ $register->spouse_name }}" />
+                                                <input type="text" name="spouse_name" class="form-control" value="<?php echo e($register->spouse_name); ?>" />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>นามสกุลคู่สมรส</label>
-                                            <input type="text" name="spouse_lastname" class="form-control" value="{{ $register->spouse_lastname }}" />
+                                            <input type="text" name="spouse_lastname" class="form-control" value="<?php echo e($register->spouse_lastname); ?>" />
                                         </div>
                                         <div class="col-md-4">
                                             <label>อาชีพคู่สมรส</label>
-                                            <input type="text" name="spouse_career" class="form-control" value="{{ $register->spouse_career }}" />
+                                            <input type="text" name="spouse_career" class="form-control" value="<?php echo e($register->spouse_career); ?>" />
                                         </div>
                                     </div>
                                 </div>
@@ -432,16 +434,16 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>ชื่อผู้ติดต่อเร่งด่วน</label><small class="text-danger">*</small>
-                                                <input type="text" name="urgent_name" class="form-control" value="{{ $register->urgent_name }}"  required/>
+                                                <input type="text" name="urgent_name" class="form-control" value="<?php echo e($register->urgent_name); ?>"  required/>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>สกุลผู้ติดต่อเร่งด่วน</label><small class="text-danger">*</small>
-                                            <input type="text" name="urgent_lastname" class="form-control" value="{{ $register->urgent_lastname }}" required />
+                                            <input type="text" name="urgent_lastname" class="form-control" value="<?php echo e($register->urgent_lastname); ?>" required />
                                         </div>
                                         <div class="col-md-4">
                                             <label>ความสัมพันธ์</label><small class="text-danger">*</small>
-                                            <input type="text" name="urgent_relationship" class="form-control" value="{{ $register->urgent_relationship }}" required />
+                                            <input type="text" name="urgent_relationship" class="form-control" value="<?php echo e($register->urgent_relationship); ?>" required />
                                         </div>
                                     </div>
                                 </div>
@@ -451,12 +453,12 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>เบอร์โทร</label><small class="text-danger">*</small>
-                                                <input type="text" name="urgent_phone" class="form-control" value="{{ $register->urgent_phone }}" required />
+                                                <input type="text" name="urgent_phone" class="form-control" value="<?php echo e($register->urgent_phone); ?>" required />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>อีเมล์</label>
-                                            <input type="text" name="urgent_email" class="form-control" value="{{ $register->urgent_email }}" />
+                                            <input type="text" name="urgent_email" class="form-control" value="<?php echo e($register->urgent_email); ?>" />
                                         </div>
                                     </div>
                                 </div>
@@ -469,19 +471,19 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>เลขที่</label><small class="text-danger">*</small>
-                                                <input type="text" name="address" class="form-control" value="{{ $register->address }}" required />
+                                                <input type="text" name="address" class="form-control" value="<?php echo e($register->address); ?>" required />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>หมู่ที่</label>
-                                                <input type="text" name="moo" class="form-control" value="{{ $register->moo }}" />
+                                                <input type="text" name="moo" class="form-control" value="<?php echo e($register->moo); ?>" />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>ถนน/ซอย</label>
-                                                <input type="text" name="soi" class="form-control" value="{{ $register->soi }}" />
+                                                <input type="text" name="soi" class="form-control" value="<?php echo e($register->soi); ?>" />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -505,7 +507,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>รหัสไปรษณีย์</label><small class="text-danger">*</small>
-                                                <input type="text" name="postalcode" class="form-control" value="{{ $register->postalcode }}" required />
+                                                <input type="text" name="postalcode" class="form-control" value="<?php echo e($register->postalcode); ?>" required />
                                             </div>
                                         </div>
                                     </div>
@@ -519,19 +521,19 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>เลขที่</label><small class="text-danger">*</small>
-                                                <input type="text" name="address_now" class="form-control" value="{{ $register->address_now }}" required />
+                                                <input type="text" name="address_now" class="form-control" value="<?php echo e($register->address_now); ?>" required />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>หมู่ที่</label>
-                                                <input type="text" name="moo_now" class="form-control" value="{{ $register->moo_now }}" />
+                                                <input type="text" name="moo_now" class="form-control" value="<?php echo e($register->moo_now); ?>" />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>ถนน/ซอย</label>
-                                                <input type="text" name="soi_now" class="form-control" value="{{ $register->soi_now }}" />
+                                                <input type="text" name="soi_now" class="form-control" value="<?php echo e($register->soi_now); ?>" />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -555,7 +557,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>รหัสไปรษณีย์</label><small class="text-danger">*</small>
-                                                <input type="text" name="postalcode_now" class="form-control" value="{{ $register->postalcode_now }}"  required />
+                                                <input type="text" name="postalcode_now" class="form-control" value="<?php echo e($register->postalcode_now); ?>"  required />
                                             </div>
                                         </div>
                                     </div>
@@ -564,35 +566,35 @@
 
                             <div class="tab-pane fade" id="styleTab_educatation">
 
-                            	@if( count($education) > 0 )
-                            	@foreach( $education as $item )
-                                    @php( $value = $registereducation->where('education_id' , $item->education_id)->first() )
+                            	<?php if( count($education) > 0 ): ?>
+                            	<?php $__currentLoopData = $education; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php ( $value = $registereducation->where('education_id' , $item->education_id)->first() ); ?>
                             		<div class="row">
 	                                    <div class="col-md-12">
 	                                        <div class="col-md-6">
 	                                            <div class="form-group">
-	                                                <label>{{ $item->education_name }}</label>
-                                                    @if( count($value) > 0 )
-	                                                <input type="text" name="education_name[{{ $item->education_id }}]" class="form-control"  value="{{ $value->register_education_name }}" />
-                                                    @else
-                                                    <input type="text" name="education_name[{{ $item->education_id }}]" class="form-control"  />
-                                                    @endif
+	                                                <label><?php echo e($item->education_name); ?></label>
+                                                    <?php if( count($value) > 0 ): ?>
+	                                                <input type="text" name="education_name[<?php echo e($item->education_id); ?>]" class="form-control"  value="<?php echo e($value->register_education_name); ?>" />
+                                                    <?php else: ?>
+                                                    <input type="text" name="education_name[<?php echo e($item->education_id); ?>]" class="form-control"  />
+                                                    <?php endif; ?>
 	                                            </div>
 	                                        </div>
 	                                        <div class="col-md-6">
 	                                            <div class="form-group">
 	                                                <label>ปี พ.ศ. ตั้งแต่ - ถึง</label>
-                                                    @if( count($value) > 0 )
-	                                                <input type="text" name="education_year[{{ $item->education_id }}]" class="form-control" value="{{ $value->register_education_year }}" />
-                                                    @else
-                                                    <input type="text" name="education_year[{{ $item->education_id }}]" class="form-control" />
-                                                    @endif
+                                                    <?php if( count($value) > 0 ): ?>
+	                                                <input type="text" name="education_year[<?php echo e($item->education_id); ?>]" class="form-control" value="<?php echo e($value->register_education_year); ?>" />
+                                                    <?php else: ?>
+                                                    <input type="text" name="education_year[<?php echo e($item->education_id); ?>]" class="form-control" />
+                                                    <?php endif; ?>
 	                                            </div>
 	                                        </div>
 	                                    </div>
 	                                </div>
-                            	@endforeach
-                            	@endif
+                            	<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            	<?php endif; ?>
                             </div>
 
                             <div class="tab-pane fade" id="styleTab_skill">
@@ -601,23 +603,23 @@
                                         <div class="form-group">
                                             <label>ความสามารถโปรแกรม MS</label>
                                             <select class="select2 width-100" name="software[]" multiple="" style="width:100%">
-                                                @if( count($software) > 0 )
-                                                @foreach( $software as $item )
-                                                    @php( $value = $registersoftware->where('software_id' , $item->software_id)->first() )
-                                                    @if( count($value) > 0 )
-                                                    <option value="{{ $item->software_id }}" selected="">{{ $item->software_name }}</option>
-                                                    @else
-                                                    <option value="{{ $item->software_id }}">{{ $item->software_name }}</option>
-                                                    @endif
-                                                @endforeach
-                                                @endif
+                                                <?php if( count($software) > 0 ): ?>
+                                                <?php $__currentLoopData = $software; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php ( $value = $registersoftware->where('software_id' , $item->software_id)->first() ); ?>
+                                                    <?php if( count($value) > 0 ): ?>
+                                                    <option value="<?php echo e($item->software_id); ?>" selected=""><?php echo e($item->software_name); ?></option>
+                                                    <?php else: ?>
+                                                    <option value="<?php echo e($item->software_id); ?>"><?php echo e($item->software_name); ?></option>
+                                                    <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php endif; ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>ความสามารถโปรแกรมอื่นๆ</label>
-                                            <input type="text" name="software_about"  class="form-control" value="{{ $register->software_about }}" />
+                                            <input type="text" name="software_about"  class="form-control" value="<?php echo e($register->software_about); ?>" />
                                         </div>
                                     </div>
                                 </div>
@@ -626,16 +628,16 @@
                                         <div class="form-group">
                                             <label>ความสามารถพิเศษ</label>
                                             <select  class="select2 width-100" style="width:100%" name="skill[]" multiple="">
-                                                @if( count($skill) > 0 )
-                                                @foreach( $skill as $item )
-                                                    @php( $value = $registerskill->where('skill_id' , $item->skill_id)->first() )
-                                                    @if( count($value) > 0 )
-                                                    <option value="{{ $item->skill_id }}" selected="">{{ $item->skill_name }}</option>
-                                                    @else
-                                                    <option value="{{ $item->skill_id }}">{{ $item->skill_name }}</option>
-                                                    @endif
-                                                @endforeach
-                                                @endif
+                                                <?php if( count($skill) > 0 ): ?>
+                                                <?php $__currentLoopData = $skill; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php ( $value = $registerskill->where('skill_id' , $item->skill_id)->first() ); ?>
+                                                    <?php if( count($value) > 0 ): ?>
+                                                    <option value="<?php echo e($item->skill_id); ?>" selected=""><?php echo e($item->skill_name); ?></option>
+                                                    <?php else: ?>
+                                                    <option value="<?php echo e($item->skill_id); ?>"><?php echo e($item->skill_name); ?></option>
+                                                    <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php endif; ?>
                                             </select>
                                         </div>
                                     </div>
@@ -643,7 +645,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>ความสามารถพิเศษอื่นๆ</label>
-                                            <input type="text" name="skill_about" class="form-control" value="{{ $register->skill_about }}" />
+                                            <input type="text" name="skill_about" class="form-control" value="<?php echo e($register->skill_about); ?>" />
                                         </div>
                                     </div>
 
@@ -660,21 +662,21 @@
 
                                         <hr>
 
-                                        @if( count( $registertraining ) > 0 )
-                                        @foreach( $registertraining as $key => $item )
+                                        <?php if( count( $registertraining ) > 0 ): ?>
+                                        <?php $__currentLoopData = $registertraining; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                                        @if( $key == 0 )
+                                        <?php if( $key == 0 ): ?>
                                         <div class="row removetraining1">
-                                        @else
-                                        <div class="row removetraining{{ $key + 1 }}">
-                                        @endif
+                                        <?php else: ?>
+                                        <div class="row removetraining<?php echo e($key + 1); ?>">
+                                        <?php endif; ?>
                                             <div class="col-md-12">
-                                                    <input type="hidden" name="training_id[]" class="form-control" value="{{ $item->register_training_id }}" />
+                                                    <input type="hidden" name="training_id[]" class="form-control" value="<?php echo e($item->register_training_id); ?>" />
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>เริ่มวันที่</label>
                                                         <div class="input-append date datepicker" data-provide="datepicker" data-date-language="th-th"">
-                                                            <input type="text" class="form-control" name="training_datestart[]" readonly="" autocomplete="off" required="" value="{{ $item->datestartinput }}">
+                                                            <input type="text" class="form-control" name="training_datestart[]" readonly="" autocomplete="off" required="" value="<?php echo e($item->datestartinput); ?>">
                                                             <span class="add-on"><i class="icon-th"></i></span>
                                                         </div>
                                                     </div>
@@ -683,7 +685,7 @@
                                                     <div class="form-group">
                                                         <label>ถึงวันที่</label>
                                                         <div class="input-append date datepicker" data-provide="datepicker" data-date-language="th-th"">
-                                                            <input type="text" class="form-control" name="training_dateend[]" readonly="" autocomplete="off" required="" value="{{ $item->dateendinput }}">
+                                                            <input type="text" class="form-control" name="training_dateend[]" readonly="" autocomplete="off" required="" value="<?php echo e($item->dateendinput); ?>">
                                                             <span class="add-on"><i class="icon-th"></i></span>
                                                         </div>
                                                     </div>
@@ -691,20 +693,20 @@
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>หลักสูตร</label>
-                                                        <input type="text" name="course[]" class="form-control" value="{{ $item->register_training_course }}" />
+                                                        <input type="text" name="course[]" class="form-control" value="<?php echo e($item->register_training_course); ?>" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>หน่วยงาน</label>
-                                                        <input type="text" name="department[]" class="form-control" value="{{ $item->register_training_department }}" />
+                                                        <input type="text" name="department[]" class="form-control" value="<?php echo e($item->register_training_department); ?>" />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        @endforeach
-                                        @endif
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
 
                                     </div>
                                 </div>    
@@ -719,20 +721,20 @@
 
                                         <hr>
 
-                                        @if( count( $registerexperience ) > 0 )
-                                        @foreach( $registerexperience as $key => $item )
-                                        @if( $key == 0 )
+                                        <?php if( count( $registerexperience ) > 0 ): ?>
+                                        <?php $__currentLoopData = $registerexperience; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if( $key == 0 ): ?>
                                         <div class="row removeexp1">
-                                        @else
-                                        <div class="row removeexp{{ $key + 1 }}">
-                                        @endif
+                                        <?php else: ?>
+                                        <div class="row removeexp<?php echo e($key + 1); ?>">
+                                        <?php endif; ?>
                                             <div class="col-md-12">
-                                                <input type="hidden" name="experience_id[]" class="form-control" value="{{ $item->register_experience_id }}" />
+                                                <input type="hidden" name="experience_id[]" class="form-control" value="<?php echo e($item->register_experience_id); ?>" />
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label>วันเริ่มทำงาน</label>
                                                         <div class="input-append date datepicker" data-provide="datepicker" data-date-language="th-th">
-                                                            <input type="text" class="form-control" name="experience_datestart[]" readonly="" autocomplete="off" required="" value="{{ $item->datestartinput }}">
+                                                            <input type="text" class="form-control" name="experience_datestart[]" readonly="" autocomplete="off" required="" value="<?php echo e($item->datestartinput); ?>">
                                                             <span class="add-on"><i class="icon-th"></i></span>
                                                         </div>
                                                     </div>
@@ -741,7 +743,7 @@
                                                     <div class="form-group">
                                                         <label>วันสิ้นสุดทำงาน</label>
                                                         <div class="input-append date datepicker" data-provide="datepicker" data-date-language="th-th">
-                                                            <input type="text" class="form-control" name="experience_dateend[]" readonly="" autocomplete="off" required="" value="{{ $item->dateendinput }}">
+                                                            <input type="text" class="form-control" name="experience_dateend[]" readonly="" autocomplete="off" required="" value="<?php echo e($item->dateendinput); ?>">
                                                             <span class="add-on"><i class="icon-th"></i></span>
                                                         </div>
                                                     </div>
@@ -749,33 +751,33 @@
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label>บริษัท/องค์กร</label>
-                                                        <input type="text" name="experience_company[]" class="form-control" value="{{ $item->register_experience_company }}" />
+                                                        <input type="text" name="experience_company[]" class="form-control" value="<?php echo e($item->register_experience_company); ?>" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label>ตำแหน่ง</label>
-                                                        <input type="text" name="experience_position[]" class="form-control" value="{{ $item->register_experience_position }}" />
+                                                        <input type="text" name="experience_position[]" class="form-control" value="<?php echo e($item->register_experience_position); ?>" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label>ลักษณะงาน</label>
-                                                        <input type="text" name="experience_description[]" class="form-control" value="{{ $item->register_experience_description }}" />
+                                                        <input type="text" name="experience_description[]" class="form-control" value="<?php echo e($item->register_experience_description); ?>" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label>สาเหตุที่ออก</label>
-                                                        <input type="text" name="experience_resign[]" class="form-control" value="{{ $item->register_experience_resign }}" />
+                                                        <input type="text" name="experience_resign[]" class="form-control" value="<?php echo e($item->register_experience_resign); ?>" />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         
-                                        @endforeach
-                                        @endif
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -798,15 +800,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if( count($registerdocument) > 0 )
-                                            @foreach( $registerdocument as $item )
+                                            <?php if( count($registerdocument) > 0 ): ?>
+                                            <?php $__currentLoopData = $registerdocument; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
-                                                <td>{{ $item->register_document_name }}</td>
-                                                <td><a href="{{ asset($item->register_document_file) }}" class="btn btn-info text-right" target="_blank"> <i class="fa fa-download"></i> ดาวน์โหลด</a> </td>
-                                                <td><a href="{{ url('recurit/register/section/delete-file/'.$item->register_document_id) }}" class="btn btn-danger text-right"><i class="fa fa-remove"></i> ลบ</a> </td>
+                                                <td><?php echo e($item->register_document_name); ?></td>
+                                                <td><a href="<?php echo e(asset($item->register_document_file)); ?>" class="btn btn-info text-right" target="_blank"> <i class="fa fa-download"></i> ดาวน์โหลด</a> </td>
+                                                <td><a href="<?php echo e(url('recurit/register/section/delete-file/'.$item->register_document_id)); ?>" class="btn btn-danger text-right"><i class="fa fa-remove"></i> ลบ</a> </td>
                                             </tr>
-                                            @endforeach
-                                            @endif
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -816,12 +818,12 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>รหัสสำนักงานเจ้าของคดี</label>
-                                            <input type="number" min="0" name="register_office_case" class="form-control"  value="{{ $register->register_office_case }}" />
+                                            <input type="number" min="0" name="register_office_case" class="form-control"  value="<?php echo e($register->register_office_case); ?>" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label>เลขทะเบียนคดี</label>
-                                        <input type="text" name="register_number_case" class="form-control"  value="{{ $register->register_number_case }}" />
+                                        <input type="text" name="register_number_case" class="form-control"  value="<?php echo e($register->register_number_case); ?>" />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -829,18 +831,18 @@
                                         <div class="form-group">
                                             <label>ประเภทคดี</label>
                                             <select class="form-control"  name="register_type_case" >
-                                                @if( count($registertype) > 0 )
-                                                @foreach( $registertype as $item )
-                                                    <option value="{{ $item->register_type_id }}" @if ($item->register_type_id  == $register->register_type_id) selected  @endif >{{ $item->register_type_name }}</option>
-                                                @endforeach
-                                                @endif
+                                                <?php if( count($registertype) > 0 ): ?>
+                                                <?php $__currentLoopData = $registertype; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($item->register_type_id); ?>" <?php if($item->register_type_id  == $register->register_type_id): ?> selected  <?php endif; ?> ><?php echo e($item->register_type_name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php endif; ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>ปีทะเบียนคดี</label>
-                                            <input type="number" min="1111" max="9999" name="register_year_case" class="form-control" value="{{ $register->register_year_case }}" />
+                                            <input type="number" min="1111" max="9999" name="register_year_case" class="form-control" value="<?php echo e($register->register_year_case); ?>" />
                                         </div>
                                     </div>
                                 </div>
@@ -851,14 +853,15 @@
             </div>
         </div>
     </div>
-    {!! Form::close() !!}
+    <?php echo Form::close(); ?>
+
 
 </div>
 
 
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('pageScript')
+<?php $__env->startSection('pageScript'); ?>
 <script type="text/javascript">
 
 $('#picture').on('change', function() {
@@ -926,21 +929,21 @@ $('#picture').on('change', function() {
     });
 
 
-    if ("{{ $register->starthiredate }}" != '0000-00-00' ) {
+    if ("<?php echo e($register->starthiredate); ?>" != '0000-00-00' ) {
         $('#starthiredate').datepicker({
             format: 'dd/mm/yyyy',
             language: 'th',     
             autoclose: true,         
             thaiyear: true              
-        }).datepicker("setDate", "{{ $register->starthireinput }}");  
+        }).datepicker("setDate", "<?php echo e($register->starthireinput); ?>");  
     }
-    if ("{{ $register->endhiredate }}" != '0000-00-00' ) {
+    if ("<?php echo e($register->endhiredate); ?>" != '0000-00-00' ) {
         $('#endhiredate').datepicker({
             format: 'dd/mm/yyyy',
             language: 'th',  
             autoclose: true,             
             thaiyear: true              
-        }).datepicker("setDate", "{{ $register->endhireinput }}");  
+        }).datepicker("setDate", "<?php echo e($register->endhireinput); ?>");  
     }
 
     $('#birthday').datepicker({
@@ -948,12 +951,12 @@ $('#picture').on('change', function() {
         language: 'th',  
         autoclose: true,             
         thaiyear: true              
-    }).datepicker("setDate", "{{ $register->birthdayinputeng }}"); 
+    }).datepicker("setDate", "<?php echo e($register->birthdayinputeng); ?>"); 
 
     $("#person_id").change(function(){
         $.ajax({
             type:"get",
-            url:"{{ url('api/register-person') }}",
+            url:"<?php echo e(url('api/register-person')); ?>",
             data:{
                 person_id : $("#person_id").val(),
             },
@@ -966,10 +969,10 @@ $('#picture').on('change', function() {
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/province') }}",
+        url : "<?php echo e(url('api/province')); ?>",
         dataType:"Json",
         data : {
-            province : "{{ $register->province_id }}"
+            province : "<?php echo e($register->province_id); ?>"
         },
         success : function(response){
             if( response.row > 0 ){
@@ -989,11 +992,11 @@ $('#picture').on('change', function() {
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/amphur') }}",
+        url : "<?php echo e(url('api/amphur')); ?>",
         dataType:"Json",
         data : {
-            province : "{{ $register->province_id }}",
-            amphur : "{{ $register->amphur_id }}",
+            province : "<?php echo e($register->province_id); ?>",
+            amphur : "<?php echo e($register->amphur_id); ?>",
         },
         success : function(response){
             if( response.row > 0 ){
@@ -1013,11 +1016,11 @@ $('#picture').on('change', function() {
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/district') }}",
+        url : "<?php echo e(url('api/district')); ?>",
         dataType:"Json",
         data : {
-            amphur : "{{ $register->amphur_id }}",
-            district : "{{ $register->district_id }}"
+            amphur : "<?php echo e($register->amphur_id); ?>",
+            district : "<?php echo e($register->district_id); ?>"
         },
         success : function(response){
             if( response.row > 0 ){
@@ -1040,7 +1043,7 @@ $('#picture').on('change', function() {
 
             $.ajax({
                 type:"get",
-                url : "{{ url('api/amphur') }}",
+                url : "<?php echo e(url('api/amphur')); ?>",
                 dataType:"Json",
                 data : {
                     province : $("#province").val(),
@@ -1078,7 +1081,7 @@ $('#picture').on('change', function() {
         if( $("#amphur").val() != 0 ){
             $.ajax({
                 type:"get",
-                url : "{{ url('api/district') }}",
+                url : "<?php echo e(url('api/district')); ?>",
                 dataType:"Json",
                 data : {
                     amphur : $("#amphur").val(),
@@ -1110,10 +1113,10 @@ $('#picture').on('change', function() {
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/province') }}",
+        url : "<?php echo e(url('api/province')); ?>",
         dataType:"Json",
         data : {
-            province : "{{ $register->province_id_now }}"
+            province : "<?php echo e($register->province_id_now); ?>"
         },
         success : function(response){
             if( response.row > 0 ){
@@ -1133,11 +1136,11 @@ $('#picture').on('change', function() {
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/amphur') }}",
+        url : "<?php echo e(url('api/amphur')); ?>",
         dataType:"Json",
         data : {
-            province : "{{ $register->province_id_now }}",
-            amphur : "{{ $register->amphur_id_now }}",
+            province : "<?php echo e($register->province_id_now); ?>",
+            amphur : "<?php echo e($register->amphur_id_now); ?>",
         },
         success : function(response){
             if( response.row > 0 ){
@@ -1157,11 +1160,11 @@ $('#picture').on('change', function() {
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/district') }}",
+        url : "<?php echo e(url('api/district')); ?>",
         dataType:"Json",
         data : {
-            amphur :  "{{ $register->amphur_id_now }}",
-            district : "{{ $register->district_id_now }}"
+            amphur :  "<?php echo e($register->amphur_id_now); ?>",
+            district : "<?php echo e($register->district_id_now); ?>"
         },
         success : function(response){
             if( response.row > 0 ){
@@ -1185,7 +1188,7 @@ $('#picture').on('change', function() {
 
             $.ajax({
                 type:"get",
-                url : "{{ url('api/amphur') }}",
+                url : "<?php echo e(url('api/amphur')); ?>",
                 dataType:"Json",
                 data : {
                     province : $("#now_province").val(),
@@ -1222,7 +1225,7 @@ $('#picture').on('change', function() {
         if( $("#now_amphur").val() != 0 ){
             $.ajax({
                 type:"get",
-                url : "{{ url('api/district') }}",
+                url : "<?php echo e(url('api/district')); ?>",
                 dataType:"Json",
                 data : {
                     amphur : $("#now_amphur").val(),
@@ -1255,7 +1258,7 @@ $('#picture').on('change', function() {
     var wrapper_training         = $(".input_training"); //Fields wrapper
     var add_training      = $(".add_training"); //Add button ID
     var html_training = "";
-    var number_training = $('input[name="training_datestart[]"]').length ;    // "{{ count($registertraining) }}"; //initlal text box count
+    var number_training = $('input[name="training_datestart[]"]').length ;    // "<?php echo e(count($registertraining)); ?>"; //initlal text box count
 
     $(add_training).click(function(e){ //on add input button click
         if(number_training < max_training){ //max input box allowed
@@ -1329,7 +1332,7 @@ $('#picture').on('change', function() {
             $(function(){
                 $.ajax({
                     type:"get",
-                    url:"{{ url('api/deleteregistertraining') }}",
+                    url:"<?php echo e(url('api/deleteregistertraining')); ?>",
                     dataType:"Html",
                     data:{
                         training_id : training_id,
@@ -1353,7 +1356,7 @@ $('#picture').on('change', function() {
     var wrapper_experience         = $(".input_experience"); //Fields wrapper
     var add_experience      = $(".add_experience"); //Add button ID
     var html_experience = "";
-    var number_experience =  $('input[name="experience_datestart[]"]').length ;// "{{ count($registerexperience) }}"; //initlal text box count
+    var number_experience =  $('input[name="experience_datestart[]"]').length ;// "<?php echo e(count($registerexperience)); ?>"; //initlal text box count
 
     $(add_experience).click(function(e){ //on add input button click
         if(number_experience < max_experience){ //max input box allowed
@@ -1439,7 +1442,7 @@ $('#picture').on('change', function() {
             $(function(){
                 $.ajax({
                     type:"get",
-                    url:"{{ url('api/deleteregisterexpereince') }}",
+                    url:"<?php echo e(url('api/deleteregisterexpereince')); ?>",
                     dataType:"Html",
                     data:{
                         experience_id : experience_id,
@@ -1455,4 +1458,5 @@ $('#picture').on('change', function() {
 
     })
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.mains', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

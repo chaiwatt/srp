@@ -11,7 +11,9 @@ class Register extends Model{
     protected $table = 'tb_register';
     protected $primaryKey = 'register_id';
 
-	
+    protected $fillable = [];
+    protected $guarded = [];
+    
     public function getPrefixnameAttribute(){
     	$name = "";
     	$q = Prefix::where('prefix_id' , $this->prefix_id)->first();
@@ -90,18 +92,18 @@ class Register extends Model{
     }
 
     public function getMonthdiffAttribute(){
-        return Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate))->format('%m เดือน %d วัน');
+        return Carbon::parse( $this->starthiredate)->timezone('Asia/Bangkok')->diff(Carbon::parse( $this->endhiredate)->timezone('Asia/Bangkok')->addDays(1))->format('%m เดือน %d วัน');
     }
 
     public function getContractpaymentAttribute(){
-        $m = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate))->format('%m'))*9000;
-        $d = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate))->format('%d'))*300;
+        $m = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate)->addDays(1))->format('%m'))*9000;
+        $d = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate)->addDays(1))->format('%d'))*300;
         return $m + $d; 
     }
 
     public function getConvertobathAttribute(){
-        $m = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate))->format('%m'))*9000;
-        $d = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate))->format('%d'))*300;
+        $m = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate)->addDays(1))->format('%m'))*9000;
+        $d = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate)->addDays(1))->format('%d'))*300;
         $sum  = $m + $d; 
         return $this->convert($sum);
     }
