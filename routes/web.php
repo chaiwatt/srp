@@ -59,7 +59,7 @@ Route::group(['prefix' => 'api'] , function(){
 	Route::get('contractorposition' , 'ApiController@Position2');
 	Route::get('group' , 'ApiController@Group');
 	Route::get('register-person' , 'ApiController@RegisterPerson');
-	Route::get('active-person' , 'ApiController@ActivePerson');
+	Route::get('active-person' , 'ApiController@ActivePerson');	
 	Route::get('check-person' , 'ApiController@CheckPerson');
 	Route::get('registertype' , 'ApiController@Registertype');
 	Route::get('sectionexist' , 'ApiController@SectionExist');

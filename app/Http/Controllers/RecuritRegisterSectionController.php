@@ -439,7 +439,7 @@ class RecuritRegisterSectionController extends Controller{
                         $dateend = "";
                     }
 
-                    if(count( @$alltrainer[$key]) > 0){
+                    if(count( @$allregisterexperience[$key]) > 0){
                         RegisterExperience::where('register_id',$register->register_id)
                                             ->update([ 
                                                 'register_experience_datestart' => $datestart , 
