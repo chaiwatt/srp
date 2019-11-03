@@ -591,7 +591,7 @@
                 return;
             }
         }
-        if(sumfilesize > 5000){
+        if(sumfilesize > 10240){
             $("#doc").val(null);
             alert('ขนาดไฟล์รวมเกิน 10MB');
         }

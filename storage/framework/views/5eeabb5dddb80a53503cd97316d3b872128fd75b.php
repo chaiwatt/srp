@@ -1,27 +1,26 @@
-@extends('layout.mains')
+<?php $__env->startSection('pageCss'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('pageCss')
-@stop
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="padding-md">
 
     <ul class="breadcrumb">
-        <li><a href="{{ url('landing') }}">หน้าเว็บไซต์</a></li>
-        <li><a href="{{ url('contractor/register/') }}">ผู้สมัครร่วมโครงการ</a></li>
+        <li><a href="<?php echo e(url('landing')); ?>">หน้าเว็บไซต์</a></li>
+        <li><a href="<?php echo e(url('contractor/register/')); ?>">ผู้สมัครร่วมโครงการ</a></li>
         <li>แบบฟอร์มสมัครจ้างเหมา</li>    
     </ul>
 
-    {!! Form::open([ 'url' => 'contractor/register/create' , 'method' => 'post' , 'files' => 'true' ]) !!} 
+    <?php echo Form::open([ 'url' => 'contractor/register/create' , 'method' => 'post' , 'files' => 'true' ]); ?> 
     <div class="row">
         <div class="col-sm-6">
             <div class="page-title">
-                แบบฟอร์มสมัครจ้างเหมา ปีงบประมาณ : {{ $project->year_budget }}
+                แบบฟอร์มสมัครจ้างเหมา ปีงบประมาณ : <?php echo e($project->year_budget); ?>
+
             </div>
         </div>
         <div class="col-sm-6">
             <div class="pull-right">
-                {{-- <button type="button" class="btn btn-success" id="personaldata">ดึงข้อมูลอัตโนมัติ</button> --}}
+                
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก</a>
             </div>
         </div>
@@ -29,31 +28,32 @@
 
     <div class="row">
         <div class="col-md-12">
-            @if( Session::has('success') )
+            <?php if( Session::has('success') ): ?>
                 <div class="alert alert-success alert-custom alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <i class="fa fa-check-circle m-right-xs"></i> {{ Session::get('success') }}
+                    <i class="fa fa-check-circle m-right-xs"></i> <?php echo e(Session::get('success')); ?>
+
                 </div>
-            @elseif( Session::has('error') )
+            <?php elseif( Session::has('error') ): ?>
                 <div class="alert alert-danger alert-custom alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                     <i class="fa fa-times-circle m-right-xs"></i> {{ Session::get('error') }}
+                     <i class="fa fa-times-circle m-right-xs"></i> <?php echo e(Session::get('error')); ?>
+
                 </div>
-            @endif
+            <?php endif; ?>
             
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
-                        {{-- <label>ตำแหน่งที่จ้าง</label><small class="text-danger">*</small>
-                        <select class="form-control" name="position" id="position" required></select> --}}
+                        
                         
                         <label>ตำแหน่งที่จ้าง</label><small class="text-danger">*</small>
                         <select class="form-control" name="position" required>
-                                @if( count($position) > 0 )
-                                @foreach( $position as $item )
-                                    <option value="{{ $item->position_id }}">{{ $item->position_name }}</option>
-                                @endforeach
-                                @endif
+                                <?php if( count($position) > 0 ): ?>
+                                <?php $__currentLoopData = $position; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($item->position_id); ?>"><?php echo e($item->position_name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
                         </select>
                     </div>
                 </div>
@@ -91,11 +91,11 @@
                                         <div class="col-md-4">
                                             <label>คำนำหน้าชื่อ</label><small class="text-danger">*</small>
                                             <select class="form-control" name="prefix" required>
-                                                    @if( count($prefix) > 0 )
-                                                    @foreach( $prefix as $item )
-                                                        <option value="{{ $item->prefix_id }}">{{ $item->prefix_name }}</option>
-                                                    @endforeach
-                                                    @endif
+                                                    <?php if( count($prefix) > 0 ): ?>
+                                                    <?php $__currentLoopData = $prefix; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($item->prefix_id); ?>"><?php echo e($item->prefix_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
                                             </select>
                                         </div>
                                         <div class="col-md-4">
@@ -140,15 +140,14 @@
                                             <input type="text" name="ethnicity" class="form-control" required="" />
                                         </div>
                                         <div class="col-md-4">
-                                            {{-- <label>ศาสนา</label><small class="text-danger">*</small>
-                                            <select class="form-control" name="religion" id="religion"></select> --}}
+                                            
                                             <label>ศาสนา</label><small class="text-danger">*</small>
                                             <select class="form-control" name="religion" required>
-                                                    @if( count($religion) > 0 )
-                                                    @foreach( $religion as $item )
-                                                        <option value="{{ $item->religion_id }}">{{ $item->religion_name }}</option>
-                                                    @endforeach
-                                                    @endif
+                                                    <?php if( count($religion) > 0 ): ?>
+                                                    <?php $__currentLoopData = $religion; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($item->religion_id); ?>"><?php echo e($item->religion_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
                                             </select>
                                         </div>
                                     </div>
@@ -160,24 +159,23 @@
                                             <div class="form-group">
                                                 <label>การรับราชการทหาร</label><small class="text-danger">*</small>
                                                 <select class="form-control" name="military" required>
-                                                        @if( count($military) > 0 )
-                                                        @foreach( $military as $item )
-                                                            <option value="{{ $item->military_id }}">{{ $item->military_name }}</option>
-                                                        @endforeach
-                                                        @endif
+                                                        <?php if( count($military) > 0 ): ?>
+                                                        <?php $__currentLoopData = $military; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($item->military_id); ?>"><?php echo e($item->military_name); ?></option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        <?php endif; ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            {{-- <label>สถานะ</label><small class="text-danger">*</small>
-                                            <select class="form-control" name="married" id="married" required></select> --}}
+                                            
                                             <label>สถานะ</label><small class="text-danger">*</small>
                                             <select class="form-control" name="married" required>
-                                                    @if( count($married) > 0 )
-                                                    @foreach( $married as $item )
-                                                        <option value="{{ $item->married_id }}">{{ $item->married_name }}</option>
-                                                    @endforeach
-                                                    @endif
+                                                    <?php if( count($married) > 0 ): ?>
+                                                    <?php $__currentLoopData = $married; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($item->married_id); ?>"><?php echo e($item->married_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
                                             </select>
                                         </div>
                                         <div class="col-md-4">
@@ -407,26 +405,26 @@
                             </div><!-- ./tab-pane -->
                             <div class="tab-pane fade" id="style3Tab2">
 
-                            	@if( count($education) > 0 )
-                            	@foreach( $education as $item )
+                            	<?php if( count($education) > 0 ): ?>
+                            	<?php $__currentLoopData = $education; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             		<div class="row">
 	                                    <div class="col-md-12">
 	                                        <div class="col-md-6">
 	                                            <div class="form-group">
-	                                                <label>{{ $item->education_name }}</label>
-	                                                <input type="text" name="education_name[{{ $item->education_id }}]" class="form-control" />
+	                                                <label><?php echo e($item->education_name); ?></label>
+	                                                <input type="text" name="education_name[<?php echo e($item->education_id); ?>]" class="form-control" />
 	                                            </div>
 	                                        </div>
 	                                        <div class="col-md-6">
 	                                            <div class="form-group">
 	                                                <label>ปี พ.ศ. ตั้งแต่ - ถึง</label>
-	                                                <input type="text" name="education_year[{{ $item->education_id }}]" class="form-control" />
+	                                                <input type="text" name="education_year[<?php echo e($item->education_id); ?>]" class="form-control" />
 	                                            </div>
 	                                        </div>
 	                                    </div>
 	                                </div>
-                            	@endforeach
-                            	@endif
+                            	<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            	<?php endif; ?>
 
                                 <div class="row">
                                     <div class="col-md-12">
@@ -434,11 +432,11 @@
                                             <div class="form-group">
                                                 <label>ความสามารถโปรแกรม MS</label>
                                                 <select class="select2 width-100" name="software[]" multiple="" style="width:100%" >
-                                                    @if( count($software) > 0 )
-                                                    @foreach( $software as $item )
-                                                        <option value="{{ $item->software_id }}">{{ $item->software_name }}</option>
-                                                    @endforeach
-                                                    @endif
+                                                    <?php if( count($software) > 0 ): ?>
+                                                    <?php $__currentLoopData = $software; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($item->software_id); ?>"><?php echo e($item->software_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -457,11 +455,11 @@
                                             <div class="form-group">
                                                 <label>ความสามารถพิเศษ</label>
                                                 <select class="select2 width-100" name="skill[]" multiple="" style="width:100%" >
-                                                    @if( count($skill) > 0 )
-                                                    @foreach( $skill as $item )
-                                                        <option value="{{ $item->skill_id }}">{{ $item->skill_name }}</option>
-                                                    @endforeach
-                                                    @endif
+                                                    <?php if( count($skill) > 0 ): ?>
+                                                    <?php $__currentLoopData = $skill; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($item->skill_id); ?>"><?php echo e($item->skill_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -498,13 +496,14 @@
             </div>
         </div>
     </div>
-    {!! Form::close() !!}
+    <?php echo Form::close(); ?>
+
 
 </div>
 
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('pageScript')
+<?php $__env->startSection('pageScript'); ?>
 <script type="text/javascript">
     
     $(document).ready(function() {
@@ -563,7 +562,7 @@
     $("#person_id").change(function(){
         $.ajax({
             type:"get",
-            url:"{{ url('api/register-contractor') }}",
+            url:"<?php echo e(url('api/register-contractor')); ?>",
             data:{
                 person_id : $("#person_id").val(),
             },
@@ -576,7 +575,7 @@
     //  $("#register_office_case").change(function(){
     //     $.ajax({
     //         type:"get",
-    //         url:"{{ url('api/sectionexist') }}",
+    //         url:"<?php echo e(url('api/sectionexist')); ?>",
     //         data:{
     //             section_id : $("#register_office_case").val(),
     //         },
@@ -589,7 +588,7 @@
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/province') }}",
+        url : "<?php echo e(url('api/province')); ?>",
         dataType:"Json",
         data : {
             province : ""
@@ -612,7 +611,7 @@
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/amphur') }}",
+        url : "<?php echo e(url('api/amphur')); ?>",
         dataType:"Json",
         data : {
             province : "",
@@ -636,7 +635,7 @@
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/district') }}",
+        url : "<?php echo e(url('api/district')); ?>",
         dataType:"Json",
         data : {
             amphur : "",
@@ -660,7 +659,7 @@
 
     $.ajax({
         type:"get",
-        url:"{{ url('api/group') }}",
+        url:"<?php echo e(url('api/group')); ?>",
         dataType:"Json",
         data:{
             group : "",
@@ -688,7 +687,7 @@
 
             $.ajax({
                 type:"get",
-                url : "{{ url('api/amphur') }}",
+                url : "<?php echo e(url('api/amphur')); ?>",
                 dataType:"Json",
                 data : {
                     province : $("#province").val(),
@@ -726,7 +725,7 @@
         if( $("#amphur").val() != 0 ){
             $.ajax({
                 type:"get",
-                url : "{{ url('api/district') }}",
+                url : "<?php echo e(url('api/district')); ?>",
                 dataType:"Json",
                 data : {
                     amphur : $("#amphur").val(),
@@ -758,7 +757,7 @@
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/province') }}",
+        url : "<?php echo e(url('api/province')); ?>",
         dataType:"Json",
         data : {
             province : ""
@@ -781,7 +780,7 @@
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/amphur') }}",
+        url : "<?php echo e(url('api/amphur')); ?>",
         dataType:"Json",
         data : {
             province : "",
@@ -805,7 +804,7 @@
 
     $.ajax({
         type:"get",
-        url : "{{ url('api/district') }}",
+        url : "<?php echo e(url('api/district')); ?>",
         dataType:"Json",
         data : {
             amphur : "",
@@ -833,7 +832,7 @@
 
             $.ajax({
                 type:"get",
-                url : "{{ url('api/amphur') }}",
+                url : "<?php echo e(url('api/amphur')); ?>",
                 dataType:"Json",
                 data : {
                     province : $("#now_province").val(),
@@ -871,7 +870,7 @@
         if( $("#now_amphur").val() != 0 ){
             $.ajax({
                 type:"get",
-                url : "{{ url('api/district') }}",
+                url : "<?php echo e(url('api/district')); ?>",
                 dataType:"Json",
                 data : {
                     amphur : $("#now_amphur").val(),
@@ -992,4 +991,5 @@
         }
     })
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.mains', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

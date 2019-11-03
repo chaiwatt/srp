@@ -1,17 +1,15 @@
-@extends('layout.mains')
+<?php $__env->startSection('pageCss'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('pageCss')
-@stop
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="padding-md">
 
     <ul class="breadcrumb">
-        <li><a href="{{ url('landing') }}">หน้าเว็บไซต์</a></li>
-        <li><a href="{{ url('setting/landing') }}">ตั้งค่า Landing Page</a></li>
+        <li><a href="<?php echo e(url('landing')); ?>">หน้าเว็บไซต์</a></li>
+        <li><a href="<?php echo e(url('setting/landing')); ?>">ตั้งค่า Landing Page</a></li>
         <li>เพิ่มเอกสารดาวน์โหลด</li>    
     </ul>
-    {!! Form::open([ 'url' => 'setting/landing/create' , 'method' => 'post', 'files' => 'true' ]) !!} 
+    <?php echo Form::open([ 'url' => 'setting/landing/create' , 'method' => 'post', 'files' => 'true' ]); ?> 
     <div class="row">
         <div class="col-sm-6">
             <div class="page-title">
@@ -48,13 +46,14 @@
             </div>
         </div>
     </div>
-    {!! Form::close() !!}
+    <?php echo Form::close(); ?>
+
 </div>
 
 
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('pageScript')
+<?php $__env->startSection('pageScript'); ?>
 <script type="text/javascript">
     $('#file').on('change', function() {
         if($(this)[0].files[0].size/1024  > 10240){
@@ -69,4 +68,5 @@
         icon: false,
     });
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.mains', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
