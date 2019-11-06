@@ -836,6 +836,7 @@
                                 (strpos(\Request::path(),'setting/user')!==false ) || 
                                 (strpos(\Request::path(),'setting/backup')!==false ) || 
                                 (strpos(\Request::path(),'setting/generalsetting')!==false ) || 
+                                (strpos(\Request::path(),'setting/inactiveregister')!==false ) || 
                                 strpos(\Request::path(),'setting/log')!==false )
                                     <li class="openable bg-palette4 open ">
                                 @else
@@ -864,6 +865,7 @@
                                         <li class="{{ ( strpos(\Request::path(),'setting/backup')!==false)?'active':'' }}"><a href="{{ url('setting/backup') }}"><span class="submenu-label thsaraban20" >สำรองฐานข้อมูล</span></a></li>
                                         <li class="{{ ( strpos(\Request::path(),'setting/generalsetting')!==false)?'active':'' }}"><a href="{{ url('setting/generalsetting') }}"><span class="submenu-label thsaraban20" >ตั้งค่าทั่วไป</span></a></li>
                                         <li class="{{ ( strpos(\Request::path(),'setting/log')!==false)?'active':'' }}"><a href="{{ url('setting/log') }}"><span class="submenu-label thsaraban20" >ข้อมูล Log</span></a></li>
+                                        <li class="{{ ( strpos(\Request::path(),'setting/inactiveregister')!==false)?'active':'' }}"><a href="{{ url('setting/inactiveregister') }}"><span class="submenu-label thsaraban20" >ผู้สมัครไม่ active</span></a></li>
                                         <li class="{{ ( strpos(\Request::path(),'deletedb')!==false)?'active':'' }}"><a href="{{ url('deletedb') }}"><span class="submenu-label thsaraban20" >ลบฐานข้อมูล</span></a></li>
                                         @endif
                                         @if( $auth->permission == 2 )

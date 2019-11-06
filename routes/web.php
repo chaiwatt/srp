@@ -1038,6 +1038,11 @@ Route::group(['middleware' => 'auth'] , function(){
 
 	Route::group(['prefix' => 'setting'] , function(){
 
+		Route::group(['prefix' => 'inactiveregister'] , function(){
+			Route::get('' , 'SettingInactiveRegisterController@Index')->name('setting.inactiveregister.index');
+			Route::get('delete/{id}' , 'SettingInactiveRegisterController@Delete')->name('setting.inactiveregister.delete');
+		});
+
 		Route::group(['prefix' => 'log'] , function(){
 			Route::get('' , 'LogController@Index'); 
 		});
