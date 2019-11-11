@@ -7,5 +7,8 @@ class SettingYear extends Model{
 	
     protected $table = 'tb_setting_year';
     protected $primaryKey = 'setting_year_id';
-	public $timestamps = false;
+    public $timestamps = false;
+    
+    protected $fillable = [];
+    protected $guarded = [];
 }

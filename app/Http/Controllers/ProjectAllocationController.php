@@ -1,27 +1,38 @@
 <?php namespace App\Http\Controllers;
 
+use DB;
+use Auth;
 use Request;
 use Session;
-use Auth;
-use DB;
 
-use App\Model\Project;
-use App\Model\Department;
-use App\Model\Section;
-use App\Model\Budget;
-use App\Model\Allocation;
-use App\Model\AllocationTransaction;
-use App\Model\AllocationWaiting;
-use App\Model\ProjectBudget;
-use App\Model\SettingYear;
-use App\Model\SettingDepartment;
-use App\Model\SettingBudget;
-use App\Model\Refund;
-use App\Model\NotifyMessage;
 use App\Model\Users;
-use App\Model\TransferTransaction;
-use App\Model\Linenotify;
+use App\Model\Budget;
+use App\Model\Employ;
+use App\Model\Refund;
+use App\Model\Survey;
 use App\Model\LogFile;
+use App\Model\Payment;
+use App\Model\Project;
+use App\Model\Section;
+use App\Model\Generate;
+use App\Model\Transfer;
+use App\Model\Allocation;
+use App\Model\Department;
+use App\Model\Linenotify;
+use App\Model\Surveyhost;
+use App\Model\Information;
+use App\Model\SettingYear;
+use App\Model\NotifyMessage;
+use App\Model\ProjectBudget;
+use App\Model\ProjectSurvey;
+use App\Model\SettingBudget;
+use App\Model\ParticipateGroup;
+use App\Model\ReadinessExpense;
+use App\Model\AllocationWaiting;
+use App\Model\SettingDepartment;
+use App\Model\InformationExpense;
+use App\Model\TransferTransaction;
+use App\Model\AllocationTransaction;
 
 class ProjectAllocationController extends Controller{
 	public function LocateSave(){
@@ -529,22 +540,44 @@ class ProjectAllocationController extends Controller{
             return redirect()->back()->withError("ไม่พบข้อมูลโครงการ");
         }
 
-        $query = Project::where('project_id' , $id)->where('is_allocated' , 1)->first();
-        if(count($query) > 0){
-            return redirect('project/allocation')->withError("ไม่สามารถลบโครงการได้ เนื่องจากได้ทำรายการจัดสรรงบแล้ว");
-        }
+        // $query = Project::where('project_id' , $id)->where('is_allocated' , 1)->first();
+        // if(count($query) > 0){
+        //     return redirect('project/allocation')->withError("ไม่สามารถลบโครงการได้ เนื่องจากได้ทำรายการจัดสรรงบแล้ว");
+        // }
 
+        // $allocation = Allocation::where('project_id' ,$id);
     	// Project::where('project_id' ,$id)->delete();
-		// ProjectAllocation::where('project_id' ,$id)->delete();
         // ProjectBudget::where('project_id' ,$id)->delete();
+        // if(!Empty($allocation)){
+        //     $allocation->delete();
+        // }
 
-        $allocation = Allocation::where('project_id' ,$id);
-    	Project::where('project_id' ,$id)->delete();
-        ProjectBudget::where('project_id' ,$id)->delete();
-        if(!Empty($allocation)){
-            $allocation->delete();
-        }
-        
+        $project = Project::where('project_id' , $id)->first();
+        Allocation::where('project_id' , $id)->delete();
+        AllocationTransaction::where('project_id' , $id)->delete();
+        AllocationWaiting::where('project_id' , $id)->delete();
+        Employ::where('project_id' , $id)->delete();
+        Generate::where('project_id' , $id)->delete();
+        Information::where('project_id' , $id)->delete();
+        InformationExpense::where('project_id' , $id)->delete();
+        Payment::where('project_id' , $id)->delete();
+        ParticipateGroup::where('project_id' , $id)->delete();
+        ProjectBudget::where('project_id' , $id)->delete();
+        ProjectSurvey::where('project_id' , $id)->delete();
+        ReadinessExpense::where('project_id' , $id)->delete();
+        Refund::where('project_id' , $id)->delete();
+        SettingBudget::where('setting_year' , $project->year_budget)->delete();
+        SettingDepartment::where('setting_year' , $project->year_budget)->delete();
+        Survey::where('project_id' , $id)->delete();
+        Surveyhost::where('project_id' , $id)->delete();
+        Transfer::where('project_id' , $id)->delete();
+        TransferTransaction::where('project_id' , $id)->delete();
+        SettingYear::where('setting_year' , $project->year_budget)->delete();
+        Project::where('project_id' , $id)->first()->delete();
+
+        SettingYear::first()->update([
+            'setting_status' => 1
+        ]);
         $new = new LogFile;
         $new->loglist_id = 3;
         $new->user_id = Auth::user()->user_id;

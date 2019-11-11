@@ -1,14 +1,12 @@
-@extends('layout.mains')
+<?php $__env->startSection('pageCss'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('pageCss')
-@stop
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="padding-md">
 
     <ul class="breadcrumb">
-        <li><a href="{{ url('landing') }}">หน้าเว็บไซต์</a></li>
-        <li><a href="{{ url('project/allocation') }}">รายการโครงการ</a></li>    
+        <li><a href="<?php echo e(url('landing')); ?>">หน้าเว็บไซต์</a></li>
+        <li><a href="<?php echo e(url('project/allocation')); ?>">รายการโครงการ</a></li>    
         <li>เพิ่มโครงการใหม่</li>
     </ul>
 
@@ -26,20 +24,22 @@
         <div class="smart-widget widget-dark-blue">
             <div class="smart-widget-header"> เพิ่มโครงการ </div>
             <div class="smart-widget-body">
-                @if( Session::has('success') )
+                <?php if( Session::has('success') ): ?>
                     <div class="alert alert-success alert-custom alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                        <i class="fa fa-check-circle m-right-xs"></i> {{ Session::get('success') }}
+                        <i class="fa fa-check-circle m-right-xs"></i> <?php echo e(Session::get('success')); ?>
+
                     </div>
-                @elseif( Session::has('error') )
+                <?php elseif( Session::has('error') ): ?>
                     <div class="alert alert-danger alert-custom alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                         <i class="fa fa-times-circle m-right-xs"></i> {{ Session::get('error') }}
+                         <i class="fa fa-times-circle m-right-xs"></i> <?php echo e(Session::get('error')); ?>
+
                     </div>
-                @endif
+                <?php endif; ?>
 
                 <div class="smart-widget-body  padding-md"> <!-- form create project -->
-                    {!! Form::open([ 'url' => 'project/allocation/create' , 'method' => 'post' ]) !!} 
+                    <?php echo Form::open([ 'url' => 'project/allocation/create' , 'method' => 'post' ]); ?> 
                         <div class="form-group">
                             <label>วันเริ่มโครงการ </label>
                             <div class="input-append date datepicker" data-provide="datepicker" data-date-language="th-th">
@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             <label>ปีงบประมาณ</label>
-                            <input type="number" name="year" min="2500" max="9999" class="form-control" value="{{ $settingyear->setting_year }}" autocomplete="off" required/>
+                            <input type="number" name="year" min="2500" max="9999" class="form-control" value="<?php echo e($settingyear->setting_year); ?>" autocomplete="off" required/>
                         </div>
                         <div class="form-group">
                             <label>เงินตั้งต้น</label>
@@ -69,15 +69,16 @@
                         <div class="form-group text-right">
                             <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> บันทึก</button>
                         </div>
-                    {!! Form::close() !!}
+                    <?php echo Form::close(); ?>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('pageScript')
+<?php $__env->startSection('pageScript'); ?>
 <script type="text/javascript">
     $('.datepicker').datepicker({
         language: 'th',
@@ -87,4 +88,5 @@
         orientation: "buttom",
     });
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.mains', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
