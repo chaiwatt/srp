@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="page-title">
-                โครงการคืนความดีสู่สังคม: ปีงบประมาณ {{ $settingyear->setting_year}}
+                โครงการคืนคนดีสู่สังคม: ปีงบประมาณ {{ $settingyear->setting_year}}
             </div>
         </div>
         <div class="col-sm-6">

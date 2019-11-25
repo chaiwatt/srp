@@ -445,7 +445,7 @@ class ProjectAllocationController extends Controller{
     	$project = new Project;
     	$project->adddate = date('Y-m-d H:i:s');
     	$project->year_budget = Request::input('year');
-    	$project->project_name = "โครงการคืนความดีสู่สังคม";
+    	$project->project_name = "โครงการคืนคนดีสู่สังคม";
         $project->project_description = Request::input('description');
     	$project->totalbudget = Request::input('budget');
     	$project->startdate = $date_start;

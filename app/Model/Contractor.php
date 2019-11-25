@@ -185,13 +185,33 @@ class Contractor extends Model
 
     public function getContractpaymentAttribute(){
         $m = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate))->format('%m'))*9000;
-        $d = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate))->format('%d'))*300;
+        $date = explode("-",  $this->endhiredate);
+        $month = $date[1];
+        $wage = 0;
+        if($month == 1 || $month == 3 || $month == 5 || $month == 7  || $month == 8  || $month == 10  || $month == 12 ){
+             $wage = intval(9000/31);
+         }else if ($month == 4 || $month == 6 || $month == 9 || $month == 11  ){
+             $wage = intval(9000/30);
+         }else{
+             $wage = intval(9000/28);
+         }        
+        $d = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate))->format('%d'))*$wage;
         return $m + $d; 
     }
 
     public function getConvertobathAttribute(){
         $m = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate))->format('%m'))*9000;
-        $d = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate))->format('%d'))*300;
+        $date = explode("-",  $this->endhiredate);
+        $month = $date[1];
+        $wage = 0;
+        if($month == 1 || $month == 3 || $month == 5 || $month == 7  || $month == 8  || $month == 10  || $month == 12 ){
+             $wage = intval(9000/31);
+         }else if ($month == 4 || $month == 6 || $month == 9 || $month == 11  ){
+             $wage = intval(9000/30);
+         }else{
+             $wage = intval(9000/28);
+         }
+        $d = intval(Carbon::parse( $this->starthiredate)->diff(Carbon::parse( $this->endhiredate))->format('%d'))*$wage;
         $sum  = $m + $d; 
         return $this->convert($sum);
     }

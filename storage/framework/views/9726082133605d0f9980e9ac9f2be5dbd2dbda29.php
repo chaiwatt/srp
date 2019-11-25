@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="page-title">
-                โครงการคืนความดีสู่สังคม: ปีงบประมาณ <?php echo e($settingyear->setting_year); ?>
+                โครงการคืนคนดีสู่สังคม: ปีงบประมาณ <?php echo e($settingyear->setting_year); ?>
 
             </div>
         </div>
