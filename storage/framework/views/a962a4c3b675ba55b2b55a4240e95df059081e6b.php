@@ -1,21 +1,20 @@
-@extends('layout.mains')
+<?php $__env->startSection('pageCss'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('pageCss')
-@stop
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="padding-md">
 
     <ul class="breadcrumb">
-        <li><a href="{{ url('landing') }}">หน้าเว็บไซต์</a></li>
-        <li><a href="{{ url('recurit/payment/section') }}">การเบิกจ่ายเงินเดือน</a></li>
+        <li><a href="<?php echo e(url('landing')); ?>">หน้าเว็บไซต์</a></li>
+        <li><a href="<?php echo e(url('recurit/payment/section')); ?>">การเบิกจ่ายเงินเดือน</a></li>
         <li>เบิกจ่าย</li>    
     </ul>
 
     <div class="row">
         <div class="col-sm-6">
             <div class="page-title">
-                เบิกจ่ายเงินเดือน : {{ $generate->registername }} {{ $generate->registerlastname }}
+                เบิกจ่ายเงินเดือน : <?php echo e($generate->registername); ?> <?php echo e($generate->registerlastname); ?>
+
             </div>
         </div>
     </div>
@@ -26,20 +25,22 @@
                 <div class="smart-widget-header"> บันทึกเบิกจ่ายเงินเดือน </div>
                 <div class="smart-widget-body">
                     <div class="smart-widget-body  padding-md">
-                        {!! Form::open([ 'url' => 'recurit/payment/section/create' , 'method' => 'post' ]) !!} 
+                        <?php echo Form::open([ 'url' => 'recurit/payment/section/create' , 'method' => 'post' ]); ?> 
 
-                            <input type="hidden" name="generate" value="{{ $generate->generate_id }}">
-                            @if( Session::has('success') )
+                            <input type="hidden" name="generate" value="<?php echo e($generate->generate_id); ?>">
+                            <?php if( Session::has('success') ): ?>
                                 <div class="alert alert-success alert-custom alert-dismissible" role="alert">
                                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                    <i class="fa fa-check-circle m-right-xs"></i> {{ Session::get('success') }}
+                                    <i class="fa fa-check-circle m-right-xs"></i> <?php echo e(Session::get('success')); ?>
+
                                 </div>
-                            @elseif( Session::has('error') )
+                            <?php elseif( Session::has('error') ): ?>
                                 <div class="alert alert-danger alert-custom alert-dismissible" role="alert">
                                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                     <i class="fa fa-times-circle m-right-xs"></i> {{ Session::get('error') }}
+                                     <i class="fa fa-times-circle m-right-xs"></i> <?php echo e(Session::get('error')); ?>
+
                                 </div>
-                            @endif
+                            <?php endif; ?>
                             
                             
                             <div class="form-group">
@@ -52,12 +53,12 @@
 
                             <div class="form-group">
                                 <label>หักขาดงาน</label>
-                                <input type="number" min="0" step="1" max="{{ $generate->positionsalary }}" required value="0"  id="absence" name="absence" class="form-control" />
+                                <input type="number" min="0" step="1" max="<?php echo e($generate->positionsalary); ?>" required value="0"  id="absence" name="absence" class="form-control" />
                             </div>
 
                             <div class="form-group">
                                 <label>หักค่าปรับ</label>
-                                <input type="number" min="0" step="1" max="{{ $generate->positionsalary }}" required value="0"  id="fine"  name="fine" class="form-control" />
+                                <input type="number" min="0" step="1" max="<?php echo e($generate->positionsalary); ?>" required value="0"  id="fine"  name="fine" class="form-control" />
                             </div>
 
                             <div class="form-group">
@@ -67,7 +68,7 @@
 
                             <div class="form-group">
                                 <label>ค่าจ้างที่ได้รับ</label>
-                                <input type="number" min="0" step="1" max="{{ $generate->positionsalary }}" required name="salary" id="salary" class="form-control" value="" />
+                                <input type="number" min="0" step="1" max="<?php echo e($generate->positionsalary); ?>" required name="salary" id="salary" class="form-control" value="" />
                             </div>
 
                             <div class="row">
@@ -78,7 +79,8 @@
                                 </div>
                             </div>
                         
-                        {!! Form::close() !!}
+                        <?php echo Form::close(); ?>
+
 
                     </div>
                 </div>
@@ -88,9 +90,9 @@
 </div>
 
 
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('pageScript')
+<?php $__env->startSection('pageScript'); ?>
 <script type="text/javascript">
     $('.datepicker').datepicker({
         language: 'th',
@@ -120,4 +122,5 @@
     }
 
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.mains', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -270,7 +270,6 @@ class PublicReportController extends Controller
     }
 
     public function Readiness(){
-     
         $auth = Auth::user();
         $month = Request::input('month')==""?"":Request::input('month');
         $quater = Request::input('quater')==""?"":Request::input('quater');
@@ -490,7 +489,8 @@ class PublicReportController extends Controller
                         ->withSettingyear($settingyear)  
                         ->withParticipategroup($participategroup)                           
                         ->withParticipate($participate)
-                        ->withDepartment($department);
+                        ->withDepartment($department)
+                        ->withAuth($auth);
     }
 
 
@@ -664,7 +664,8 @@ class PublicReportController extends Controller
                         ->withReadinesssection($readinesssection)
                         ->withSettingyear($settingyear)                           
                         ->withParticipate($participate)
-                        ->withDepartment($department);
+                        ->withDepartment($department)
+                        ->withAuth($auth);
     }
 
 
@@ -857,7 +858,8 @@ class PublicReportController extends Controller
                                                 ->withParticipategroup($participategroup)
                                                 ->withPersonalassessment($personalassessment)
                                                 ->withReadinesssection($readinesssection)                                                
-                                                ->withMonth($month);
+                                                ->withMonth($month)
+                                                ->withAuth($auth);
     }
 
     public function EnoughIncome(){
@@ -984,7 +986,8 @@ class PublicReportController extends Controller
                                 ->withReadiness($readiness)
                                 ->withParticipategroup($participategroup)
                                 ->withPersonalassessment($personalassessment)
-                                ->withDepartment($department);
+                                ->withDepartment($department)
+                                ->withAuth($auth);
 
     }
 }

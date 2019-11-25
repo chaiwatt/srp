@@ -6,13 +6,13 @@
 
     <ul class="breadcrumb">
         <li><a href="<?php echo e(url('landing')); ?>">หน้าเว็บไซต์</a></li>
-        <li>ตั้งค่า ผู้สมัครไม่ Active</li>
+        <li>ตั้งค่า รายการหน่วยงาน</li>    
     </ul>
 
     <div class="row">
         <div class="col-sm-6">
             <div class="page-title">
-                ตั้งค่า ผู้สมัครไม่ Active
+                ตั้งค่า รายการหน่วยงาน
             </div>
         </div>
         
@@ -22,7 +22,7 @@
 <div class="row padding-md">
     <div class="col-md-12">
         <div class="smart-widget widget-dark-blue">
-            <div class="smart-widget-header"> รายการ ผู้สมัครไม่ Active </div>
+            <div class="smart-widget-header"> รายการหน่วยงาน </div>
             <div class="smart-widget-body">
                 <div class="smart-widget-body  padding-md">
 
@@ -42,25 +42,24 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>ชื่อ-สกุล</th>
-                                <th>หมายเลขบัรประชาชน</th>
-                                <th>กรม</th>
-                                <th>สำนักงาน</th>
-                                <th>เพิ่มเติม</th>
+                                <th>#</th>
+                                <th>หน่วยงาน</th>
+                                <th width="200">การดำเนินการ</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $__currentLoopData = $registers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $register): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if( count($department) > 0 ): ?>
+                            <?php $__currentLoopData = $department; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td><?php echo e($register->prefixname); ?><?php echo e($register->name); ?> <?php echo e($register->lastname); ?></td>
-                                    <td><?php echo e($register->person_id); ?></td>
-                                    <td><?php echo e($register->departmentname); ?></td>
-                                    <td><?php echo e($register->sectionname); ?></td>
-                                    <td>                                        
-                                        <a href="<?php echo e(url('setting/inactiveregister/delete/'.$register->register_id)); ?>" class="btn btn-xs btn-danger" onclick="return confirm('ยืนยันการลบผู้สมัคร')" ><i class="fa fa-ban"></i> ลบ</a>
+                                    <td><?php echo e($key + 1); ?></td>
+                                    <td><?php echo e($item->department_name); ?></td>
+                                    <td>
+                                        <a href="<?php echo e(url('setting/department/edit/'.$item->department_id)); ?>" class="btn btn-warning"><i class="fa fa-pencil"></i> แก้ไข</a>
+                                        <a href="<?php echo e(url('setting/department/delete/'.$item->department_id)); ?>" class="btn btn-danger" onclick="return confirm('ยืนยันการลบค่าใช้จ่าย')" ><i class="fa fa-ban"></i> ลบ</a>
                                     </td>
                                 </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
