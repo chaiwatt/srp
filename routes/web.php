@@ -429,6 +429,11 @@ Route::group(['middleware' => 'auth'] , function(){
 				Route::post('createcert' , 'RecuritRegisterSectionController@CreateCertSave');
 				Route::get('application/{id}' , 'RecuritRegisterSectionController@Application');
 			});
+			Route::group(['prefix' => 'department'] , function(){
+				Route::get('/' , 'RecuritRegisterDepartmentController@Index');
+				Route::get('view/{id}' , 'RecuritRegisterDepartmentController@View');
+				Route::get('excel' , 'RecuritRegisterDepartmentController@ExportExcel');
+			});
 		});
 
 		Route::group(['prefix' => 'employ'] , function(){

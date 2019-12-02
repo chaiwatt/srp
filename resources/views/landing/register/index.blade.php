@@ -476,7 +476,8 @@
         language: 'th',
         format : "dd/mm/yyyy",
         thaiyear: true,
-        autoclose:false,
+        autoclose:true,
+        orientation: "bottom left",
     });
 
     $("#person_id").change(function(){
@@ -851,7 +852,8 @@
                 language: 'th',
                 format : "dd/mm/yyyy",
                 thaiyear: true,
-                autoclose:false,
+                autoclose:true,
+                orientation: "bottom left",
             });
         }
 

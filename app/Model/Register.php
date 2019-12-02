@@ -198,11 +198,21 @@ class Register extends Model{
 
 
     public function getStarthiredateinputAttribute(){
-        return date('d/m/' , strtotime( $this->starthiredate ) ).(date('Y',strtotime($this->starthiredate))+543);
+        if($this->starthiredate != '0000-00-00'){
+            return  date('d/m/' , strtotime( $this->starthiredate ) ).(date('Y',strtotime($this->starthiredate))+543);
+        }else{
+            return null;
+        }
+        
     }
 
     public function getEndhiredateinputAttribute(){
-        return date('d/m/' , strtotime( $this->endhiredate ) ).(date('Y',strtotime($this->endhiredate))+543);
+        if($this->endhiredate != '0000-00-00'){
+            return date('d/m/' , strtotime( $this->endhiredate ) ).(date('Y',strtotime($this->endhiredate))+543);
+        }else{
+            return null;
+        }
+        
     }
 
 

@@ -75,7 +75,7 @@
                                         <td class="text-center"><?php echo e(number_format($item->payment_salary , 2)); ?></td>
                                         <td class="text-right">
                                             <a href="<?php echo e(url('recurit/payment/section/edit/'.$item->payment_id)); ?>" class="btn btn-warning btn-xs">แก้ไข</a>
-                                            
+                                            <a href="<?php echo e(url('recurit/payment/section/delete/'.$item->payment_id)); ?>" class="btn btn-danger btn-xs" onclick="return confirm('ยืนยันการลบข้อมูล')">ลบ</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

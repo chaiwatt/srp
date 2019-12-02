@@ -462,7 +462,8 @@
                         language: 'th',
                         format : "dd/mm/yyyy",
                         thaiyear: true,
-                        autoclose:false,
+                        autoclose:true,
+                        orientation: "bottom left",
                     });
 
                 registerid=null;
@@ -557,7 +558,8 @@
                     language: 'th',
                     format : "dd/mm/yyyy",
                     thaiyear: true,
-                    autoclose:false,
+                    autoclose:true,
+                    orientation: "bottom left",
                 });
             }
             if( number_trainer > 1 ){
@@ -644,7 +646,8 @@
                 language: 'th',
                 format : "dd/mm/yyyy",
                 thaiyear: true,
-                autoclose:false,
+                autoclose:true,
+                orientation: "bottom left",
             });
         }
 
@@ -715,7 +718,8 @@
                     language: 'th',
                     format : "dd/mm/yyyy",
                     thaiyear: true,
-                    autoclose:false,
+                    autoclose:true,
+                    orientation: "bottom left",
                 });
             }
             if( number_company > 1 ){

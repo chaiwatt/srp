@@ -75,7 +75,7 @@
                                         <td class="text-center">{{ number_format($item->payment_salary , 2) }}</td>
                                         <td class="text-right">
                                             <a href="{{ url('recurit/payment/section/edit/'.$item->payment_id) }}" class="btn btn-warning btn-xs">แก้ไข</a>
-                                            {{-- <a href="{{ url('recurit/payment/section/delete/'.$item->payment_id) }}" class="btn btn-danger btn-xs" onclick="return confirm('ยืนยันการลบข้อมูล')">ลบ</a> --}}
+                                            <a href="{{ url('recurit/payment/section/delete/'.$item->payment_id) }}" class="btn btn-danger btn-xs" onclick="return confirm('ยืนยันการลบข้อมูล')">ลบ</a>
                                         </td>
                                     </tr>
                                 @endforeach

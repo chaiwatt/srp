@@ -34,6 +34,7 @@ class ProjectReportDepartmentController extends Controller
         if( $this->authdepartment() ){
             return redirect('logout');
         }
+        
         $auth = Auth::user();
         $month = Request::input('month')==""?"":Request::input('month');
         $quater = Request::input('quater')==""?"":Request::input('quater');

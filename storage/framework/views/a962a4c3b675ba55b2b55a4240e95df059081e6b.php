@@ -63,12 +63,12 @@
 
                             <div class="form-group">
                                 <label>จำนวนวันที่ทำงาน(ใส่จำนวนวัน 0-31วัน)</label>
-                                <input type="number" min="0" step="1" max="31" required name="numwork" id="numwork" class="form-control" value="" />
+                                <input type="number" min="0" step="1" max="31" name="numwork" id="numwork" class="form-control" value="" />
                             </div>
 
                             <div class="form-group">
                                 <label>ค่าจ้างที่ได้รับ</label>
-                                <input type="number" min="0" step="1" max="<?php echo e($generate->positionsalary); ?>" required name="salary" id="salary" class="form-control" value="" />
+                                <input type="number"  step="0.01" min="0" max="<?php echo e($generate->positionsalary); ?>" required name="salary" id="salary" class="form-control" value="" />
                             </div>
 
                             <div class="row">
@@ -99,6 +99,7 @@
         format : "dd/mm/yyyy",
         thaiyear: true,
         autoclose:true,
+        orientation: "bottom left",
     })
 
     $("#numwork").keyup(function(){
@@ -113,11 +114,11 @@
 
     function getWage(month){
         if(month == 1 || month == 3 || month == 5 || month == 7  || month == 8  || month == 10  || month == 12 ){
-            return parseInt(9000/31);
+            return parseFloat(9000/31).toFixed(2);
         }else if (month == 4 || month == 6 || month == 9 || month == 11  ){
-            return parseInt(9000/30);
+            return parseFloat(9000/30).toFixed(2);
         }else{
-            return parseInt(9000/28);
+            return parseFloat(9000/28).toFixed(2);
         }
     }
 

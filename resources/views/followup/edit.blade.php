@@ -106,8 +106,9 @@
         language: 'th',
         format : "dd/mm/yyyy",
         thaiyear: true,
-        autoclose:false,
-        orientation: "buttom",
+        autoclose:true,
+        orientation: "bottom left",
+
     });
 
     function sectionList(){

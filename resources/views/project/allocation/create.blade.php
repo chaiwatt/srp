@@ -84,7 +84,7 @@
         format : "dd/mm/yyyy",
         thaiyear: true,
         autoclose:true,
-        orientation: "buttom",
+        orientation: "bottom left",
     });
 </script>
 @stop

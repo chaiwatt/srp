@@ -100,7 +100,8 @@
         language: 'th',
         format : "dd/mm/yyyy",
         thaiyear: true,
-        autoclose:false,
+        autoclose:true,
+        orientation: "bottom left",
     });
 </script>
 @stop

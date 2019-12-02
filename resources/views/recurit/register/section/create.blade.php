@@ -22,7 +22,7 @@
         </div>
         <div class="col-sm-6">
             <div class="pull-right">
-                {{-- <button type="button" class="btn btn-success" id="personaldata">ดึงข้อมูลอัตโนมัติ</button> --}}
+                
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก</button>
             </div>
         </div>
@@ -649,6 +649,7 @@
         format : "dd/mm/yyyy",
         thaiyear: true,
         autoclose:true,
+        orientation: "bottom left",
     });
 
     $("#person_id").change(function(){
@@ -1068,7 +1069,8 @@
                 language: 'th',
                 format : "dd/mm/yyyy",
                 thaiyear: true,
-                autoclose:false,
+                autoclose:true,
+                orientation: "bottom left",
             });
         }
 
@@ -1160,7 +1162,8 @@
                 language: 'th',
                 format : "dd/mm/yyyy",
                 thaiyear: true,
-                autoclose:false,
+                autoclose:true,
+                orientation: "bottom left",
             });
         }
 

@@ -38,6 +38,7 @@ class RecuritPaymentSectionController extends Controller{
 	}
 
     public function DeleteSave($id){
+        // return $id;
         if( $this->authsection() ){
             return redirect('logout');
         }
@@ -57,9 +58,10 @@ class RecuritPaymentSectionController extends Controller{
             return redirect()->back()->withError("ไม่พบข้อมูลการเบิกจ่าย");
         }
 
-        $payment->payment_status = 0;
-        $payment->save();
+        // $payment->payment_status = 0;
+        // $payment->save();
 
+        $payment->delete();
         $new = new LogFile;
         $new->loglist_id = 43;
         $new->user_id = $auth->user_id;
@@ -69,11 +71,15 @@ class RecuritPaymentSectionController extends Controller{
     }
 
     public function EditSave(){
-        
+
         if( $this->authsection() ){
             return redirect('logout');
         }
         $auth = Auth::user();
+
+        $date = explode("/", Request::input('date') );
+        $editdate = ($date[2]-543)."-".$date[1]."-".$date[0];
+        return $editdate ;
 
         $setting = SettingYear::where('setting_status' , 1)->first();
         $project = Project::where('year_budget' , $setting->setting_year)->first();
@@ -86,6 +92,7 @@ class RecuritPaymentSectionController extends Controller{
 
         $payment = Payment::where('payment_id' ,Request::input('payment'))
         ->update([ 
+            'payment_date' =>  $editdate , 
             'payment_absence' =>  Request::input('absence'), 
             'payment_fine' => Request::input('fine'),
             'payment_salary' => Request::input('salary'),
@@ -125,6 +132,7 @@ class RecuritPaymentSectionController extends Controller{
     }
 
     public function CreateSave(){
+        // return Request::input('salary') ;
         if( $this->authsection() ){
             return redirect('logout');
         }

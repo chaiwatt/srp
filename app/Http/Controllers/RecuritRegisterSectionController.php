@@ -614,6 +614,8 @@ class RecuritRegisterSectionController extends Controller{
         if( $this->authsection() ){
             return redirect('logout');
         }
+
+    //   return  Request::input('register_type_case');
         $extension_picture = array('jpg' , 'JPG' , 'jpeg' , 'JPEG' , 'GIF' , 'gif' , 'PNG' , 'png');
         $extension_pdf = array('pdf');
 

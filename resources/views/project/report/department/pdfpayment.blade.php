@@ -45,7 +45,12 @@
                         <td class="text-center">{{ number_format( $totaltransfer, 2 ) }}</td>
                         <td class="text-center">{{ number_format( $sumpayment , 2 ) }}</td>
                         <td class="text-center">{{ number_format( ($item->transferallocation - $sumpayment) , 2 ) }}</td>
+                        {{-- <td class="text-center">{{ number_format( ( $sumpayment / $item->transferallocation )* 100 , 2 ) }}</td> --}}
+                        @if ($item->transferallocation!=0)
                         <td class="text-center">{{ number_format( ( $sumpayment / $item->transferallocation )* 100 , 2 ) }}</td>
+                            @else
+                        <td class="text-center">-</td>
+                    @endif
                     </tr>
                 @endforeach
                 @endif

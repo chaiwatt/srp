@@ -84,9 +84,10 @@
 <script type="text/javascript">
     $('.datepicker').datepicker({
         format : "dd/mm/yyyy",
-        autoclose:false,
+        autoclose:true,
         thaiyear: true,
         language: 'th',
+        orientation: "bottom left",
     });
 </script>
 @stop

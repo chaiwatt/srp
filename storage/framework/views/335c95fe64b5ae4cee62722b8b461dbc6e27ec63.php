@@ -21,11 +21,13 @@
         </div>
         <div class="col-sm-6">
             <div class="pull-right">
-                <a href="<?php echo e(url('recurit/register/section/createcert/'.$register->register_id)); ?>" class="btn btn-success">ใบรับรอง</a>
-                <a href="<?php echo e(url('recurit/register/section/application/'.$register->register_id)); ?>" class="btn btn-success">แบบฟอร์มผู้สมัคร</a>
-                <a href="<?php echo e(url('recurit/register/section/compact/'.$register->register_id)); ?>" class="btn btn-success">สัญญาจ้าง</a>
-                <button type="submit" name="submit" value="consider" class="btn btn-success">บันทึกผลพิจารณา</button>
-                <button type="submit" name="submit" value="editsave" class="btn btn-success"><i class="fa fa-save"></i> บันทึก</button>
+                <?php if(Auth::user()->permission == 3): ?>
+                    <a href="<?php echo e(url('recurit/register/section/createcert/'.$register->register_id)); ?>" class="btn btn-success">ใบรับรอง</a>
+                    <a href="<?php echo e(url('recurit/register/section/application/'.$register->register_id)); ?>" class="btn btn-success">แบบฟอร์มผู้สมัคร</a>
+                    <a href="<?php echo e(url('recurit/register/section/compact/'.$register->register_id)); ?>" class="btn btn-success">สัญญาจ้าง</a>
+                    <button type="submit" name="submit" value="consider" class="btn btn-success">บันทึกผลพิจารณา</button>
+                    <button type="submit" name="submit" value="editsave" class="btn btn-success"><i class="fa fa-save"></i> บันทึก</button>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -833,7 +835,7 @@
                                             <select class="form-control"  name="register_type_case" >
                                                 <?php if( count($registertype) > 0 ): ?>
                                                 <?php $__currentLoopData = $registertype; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option value="<?php echo e($item->register_type_id); ?>" <?php if($item->register_type_id  == $register->register_type_id): ?> selected  <?php endif; ?> ><?php echo e($item->register_type_name); ?></option>
+                                                    <option value="<?php echo e($item->register_type_id); ?>" <?php if($item->register_type_id  == $register->register_type_case): ?> selected  <?php endif; ?> ><?php echo e($item->register_type_name); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 <?php endif; ?>
                                             </select>
@@ -925,7 +927,8 @@ $('#picture').on('change', function() {
         language: 'th',
         format : "dd/mm/yyyy",
         thaiyear: true,
-        autoclose:false,
+        autoclose:true,
+        orientation: "bottom left",
     });
 
 
@@ -1306,7 +1309,8 @@ $('#picture').on('change', function() {
                 language: 'th',
                 format : "dd/mm/yyyy",
                 thaiyear: true,
-                autoclose:false,
+                autoclose:true,
+                orientation: "bottom left",
             });
         }
 
@@ -1416,7 +1420,8 @@ $('#picture').on('change', function() {
                 language: 'th',
                 format : "dd/mm/yyyy",
                 thaiyear: true,
-                autoclose:false,
+                autoclose:true,
+                orientation: "bottom left",
             });
         }
 

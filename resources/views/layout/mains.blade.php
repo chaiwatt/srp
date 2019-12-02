@@ -236,12 +236,14 @@
                                         @elseif( $auth->permission == 2 )
                                         <li class="{{ ( Request::path()=='recurit/survey')?'active':''  }}"><a href="{{ url('recurit/survey') }}"><span class="submenu-label thsaraban20" >รายการสำรวจ</span></a></li>
                                         <li class="{{ ( Request::path()=='recurit/employ/section')?'active':'' }}"><a href="{{ url('recurit/employ/section') }}"><span class="submenu-label thsaraban20" >รายการจัดสรรการจ้างงาน</span></a></li>
+                                        <li class="{{ ( Request::path()=='recurit/register/department')?'active':''  }}"><a href="{{ url('recurit/register/department') }}"><span class="submenu-label thsaraban20" >รายการผู้เข้าร่วมโครงการ</span></a></li>
                                         <li class="{{ ( Request::path()=='recurit/report/department/payment')?'active':''  }}"><a href="{{ url('recurit/report/department/payment') }}"><span class="submenu-label thsaraban20" >การเบิกจ่ายเงินเดือน</span></a></li>
                                         <li class="{{ ( Request::path()=='recurit/refund/department/view')?'active':''  }}"><a href="{{ url('recurit/refund/department/view') }}"><span class="submenu-label thsaraban20" >ยืนยันงบประมาณคืนที่ได้รับ</span></a></li>
                                         <li class="{{ ( Request::path()=='recurit/refund/department')?'active':''  }}"><a href="{{ url('recurit/refund/department') }}"><span class="submenu-label thsaraban20" >คืนงบประมาณจัดจ้าง</span></a></li>
 
                                         @if ( ( strpos(\Request::path(),'recurit/report/department')!==false ) || 
                                         ( strpos(\Request::path(),'project/report/department')!==false ) ||
+                                        ( strpos(\Request::path(),'recurit/register/department')!==false ) ||
                                         ( strpos(\Request::path(),'report/recurit/department')!==false ) ||
                                         ( strpos(\Request::path(),'report/refund/department')!==false )
                                         )                                                                                                            

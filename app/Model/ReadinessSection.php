@@ -105,7 +105,7 @@ class ReadinessSection extends Model
          $number = str_replace("บาท","",$number); 
          $number = explode(".",$number); 
          if(sizeof($number)>2){ 
-         return 'ทศนิยมหลายตัวนะจ๊ะ'; 
+         return 'ทศนิยมสองตำแหน่งเท่านั้น'; 
          exit; 
          } 
          $strlen = strlen($number[0]); 

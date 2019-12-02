@@ -41,14 +41,14 @@
                                 </div>
                             @endif
                             
-{{--                             
+                            
                             <div class="form-group">
                                 <label>วันเบิกจ่าย</label>
-                                <div class="input-append date datepicker" data-provide="datepicker" data-date-language="th-th"">
-                                    <input type="text" class="form-control" name="date" readonly="" value="{{ $payment->paymentdateinput }}" autocomplete="off" required="">
+                                <div class="input-append date datepicker" data-provide="datepicker" data-date-language="th-th">
+                                    <input type="text" class="form-control" name="date" value="" autocomplete="off" required="">
                                     <span class="add-on"><i class="icon-th"></i></span>
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="form-group">
                                 <label>หักขาดงาน</label>
@@ -91,7 +91,8 @@
         language: 'th',
         format : "dd/mm/yyyy",
         thaiyear: true,
-        autoclose:false,
+        autoclose:true,
+        orientation: "bottom left",
     })
 </script>
 @stop
