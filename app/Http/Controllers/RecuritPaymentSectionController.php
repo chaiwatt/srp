@@ -79,7 +79,6 @@ class RecuritPaymentSectionController extends Controller{
 
         $date = explode("/", Request::input('date') );
         $editdate = ($date[2]-543)."-".$date[1]."-".$date[0];
-        return $editdate ;
 
         $setting = SettingYear::where('setting_status' , 1)->first();
         $project = Project::where('year_budget' , $setting->setting_year)->first();
