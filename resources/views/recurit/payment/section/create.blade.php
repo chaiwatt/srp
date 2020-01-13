@@ -43,7 +43,7 @@
                             
                             
                             <div class="form-group">
-                                <label>วันเบิกจ่าย</label>
+                                <label>วันเบิกจ่าย(เดือนที่เบิกจ่าย)</label>
                                 <div class="input-append date datepicker" data-provide="datepicker" data-date-language="th-th">
                                     <input id="paymentdate" type="text" class="form-control" name="date" autocomplete="off" required>
                                     <span class="add-on"><i class="icon-th"></i></span>
@@ -52,12 +52,12 @@
 
                             <div class="form-group">
                                 <label>หักขาดงาน</label>
-                                <input type="number" min="0" step="1" max="{{ $generate->positionsalary }}" required value="0"  id="absence" name="absence" class="form-control" />
+                                <input type="number" min="0" step="0.01" max="{{ $generate->positionsalary }}" required value="0"  id="absence" name="absence" class="form-control" />
                             </div>
 
                             <div class="form-group">
                                 <label>หักค่าปรับ</label>
-                                <input type="number" min="0" step="1" max="{{ $generate->positionsalary }}" required value="0"  id="fine"  name="fine" class="form-control" />
+                                <input type="number" min="0" step="0.01" max="{{ $generate->positionsalary }}" required value="0"  id="fine"  name="fine" class="form-control" />
                             </div>
 
                             <div class="form-group">

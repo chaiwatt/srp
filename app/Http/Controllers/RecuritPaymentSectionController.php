@@ -95,6 +95,7 @@ class RecuritPaymentSectionController extends Controller{
             'payment_absence' =>  Request::input('absence'), 
             'payment_fine' => Request::input('fine'),
             'payment_salary' => Request::input('salary'),
+            'payment_month' => $date[1],
             ]);
 
 

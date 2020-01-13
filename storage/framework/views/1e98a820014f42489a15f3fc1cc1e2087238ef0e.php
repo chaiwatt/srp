@@ -44,7 +44,7 @@
                             
                             
                             <div class="form-group">
-                                <label>วันเบิกจ่าย</label>
+                                <label>วันเบิกจ่าย(เดือนที่เบิกจ่าย)</label>
                                 <div class="input-append date datepicker" data-provide="datepicker" data-date-language="th-th">
                                     <input type="text" class="form-control" name="date" value="" autocomplete="off" required="">
                                     <span class="add-on"><i class="icon-th"></i></span>
