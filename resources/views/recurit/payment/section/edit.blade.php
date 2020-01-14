@@ -43,16 +43,16 @@
                             
                             
                             <div class="form-group">
-                                <label>วันเบิกจ่าย(เดือนที่เบิกจ่าย)</label>
+                                <label>เดือนที่เบิกจ่าย</label>
                                 <div class="input-append date datepicker" data-provide="datepicker" data-date-language="th-th">
-                                    <input type="text" class="form-control" name="date" value="" autocomplete="off" required="">
+                                    <input id="paymentdate" type="text" class="form-control" name="date" value="" autocomplete="off" required="">
                                     <span class="add-on"><i class="icon-th"></i></span>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label>หักขาดงาน</label>
-                                <input type="number" min="0" step="0.01" max="{{ $payment->position_salary }}" required="" value="{{ $payment->payment_absence }}" name="absence" class="form-control" />
+                                <label>หักขาดงาน (บาท)</label>
+                                <input type="number" min="0" step="1" max="31" required="" value="{{ $payment->payment_absence }}" name="absence" id="absence" class="form-control" />
                             </div>
 
                             <div class="form-group">
@@ -94,5 +94,6 @@
         autoclose:true,
         orientation: "bottom left",
     })
+
 </script>
 @stop
