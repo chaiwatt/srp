@@ -118,9 +118,9 @@
 });
 
 $('#_startworkdate').change(function () {
-    console.log($('#paymentdate').val().split('/')[1]);
+    // console.log($('#paymentdate').val().split('/')[1]);
     if($('#paymentdate').val().split('/')[1] != $('#startworkdate').val().split('/')[1]){
-        alert("เลือกดือนไม่ถูต้อง");
+        alert("เลือกเดือนไม่ถูต้อง");
         $("#startworkdate").val($('#paymentdate').val());
         return;
     } 
