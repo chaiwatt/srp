@@ -62,7 +62,7 @@
                             
                             <div class="form-group">
                                 <label>จำนวนวันขาดงาน (วัน)</label>
-                                <input type="number" min="0" step="0.01" max="<?php echo e($generate->positionsalary); ?>" required value="0"  id="absenceday" class="form-control" />
+                                <input type="number" min="0" step="1" max="<?php echo e($generate->positionsalary); ?>" required value="0"  id="absenceday" class="form-control" />
                             </div>
 
                             <div class="form-group">
@@ -119,7 +119,7 @@
 $('#_startworkdate').change(function () {
     console.log($('#paymentdate').val().split('/')[1]);
     if($('#paymentdate').val().split('/')[1] != $('#startworkdate').val().split('/')[1]){
-        alert("เลือกเืนไม่ถูก้อง");
+        alert("เลือกดือนไม่ถูต้อง");
         $("#startworkdate").val($('#paymentdate').val());
         return;
     } 
@@ -171,7 +171,7 @@ $('#_startworkdate').change(function () {
         }
         var month = val.split('/')[1];
         if(month == 1 || month == 3 || month == 5 || month == 7  || month == 8  || month == 10  || month == 12 ){
-            totalday = 31 - $('#startworkdate').val().split('/')[0] + 1;
+            totalday = 31 - $('#startworkdate').val().split('/')[0] + 1 - $("#absenceday").val();
             if(totalday == 31){
                 $("#absence").val($("#absenceday").val()*300);
                 $("#salary").val(9000-($("#absence").val()));
